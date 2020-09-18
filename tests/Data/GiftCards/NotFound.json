@@ -1,0 +1,12 @@
+{
+  "message": "Requested resource is not available.",
+  "errors": [
+    {
+      "id": null,
+      "status": "404",
+      "type": "not_found_error",
+      "title": "Not found error",
+      "detail": "Error detail"
+    }
+  ]
+}

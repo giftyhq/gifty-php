@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "id": "lc_RVyje31w8pmKwwmqlZW096M7",
+      "street": "Edisonweg",
+      "house_number": "5 bis",
+      "addition": null,
+      "postal_code": "3404LA",
+      "city": "IJsselstein"
+    },
+    {
+      "id": "lc_KGXeLNZ7E9vQapvOw4BpoY3A",
+      "street": "Edisonweg",
+      "house_number": "1",
+      "addition": "C",
+      "postal_code": "3404LA",
+      "city": "IJsselstein"
+    }
+  ]
+}

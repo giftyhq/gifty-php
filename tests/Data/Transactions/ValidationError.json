@@ -1,0 +1,12 @@
+{
+  "message": "The provided data is invalid",
+  "errors": [
+    {
+      "id": null,
+      "status": "422",
+      "type": "validation_error",
+      "title": "promotional",
+      "detail": "The promotional field is required."
+    }
+  ]
+}

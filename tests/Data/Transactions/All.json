@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "id": "tr_BV94pGgqRvgobxvrLX28jEl0",
+      "amount": 1250,
+      "currency": "EUR",
+      "status": "success",
+      "type": "issue",
+      "description": "Issue amount of '€ 12,50'",
+      "is_capturable": false,
+      "captured_at": "2019-06-20T12:15:27+00:00",
+      "created_at": "2019-06-20T12:15:27+00:00"
+    },
+    {
+      "id": "tr_WxBZ9wp4ov605Bd1rgjal6Dk",
+      "amount": -1,
+      "currency": "EUR",
+      "status": "pending",
+      "type": "redeem",
+      "description": "Redeem amount of '€ 0,01'",
+      "is_capturable": true,
+      "captured_at": null,
+      "created_at": "2019-06-20T12:15:31+00:00"
+    }
+  ]
+}
