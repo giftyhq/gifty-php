@@ -17,6 +17,16 @@
   "support": {
     "email": "info@gifty.nl"
   },
+  "scripts": {
+    "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon --no-progress",
+    "phpcs": "vendor/bin/phpcs src --standard=PSR12",
+    "test": "vendor/bin/phpunit",
+    "ci": [
+      "@phpstan",
+      "@phpcs",
+      "@test"
+    ]
+  },
   "require": {
     "php": ">=7.2.0",
     "ext-json": "*",
