@@ -2,6 +2,7 @@
 
 namespace Gifty\Client;
 
+use Gifty\Client\Exceptions\ApiException;
 use Gifty\Client\Factories\ServiceFactory;
 use Gifty\Client\HttpClient\GiftyGuzzleHttpClient;
 use Gifty\Client\HttpClient\GiftyHttpClientInterface;
@@ -64,6 +65,16 @@ final class GiftyClient
         return $this->serviceFactory->__get($name);
     }
 
+    public function validateApiKey(): bool
+    {
+        try {
+            $this->locations->all();
+        } catch (ApiException $e) {
+            return false;
+        }
+
+        return true;
+    }
 
     /**
      * Set the HTTP client to our default (Guzzle) or
