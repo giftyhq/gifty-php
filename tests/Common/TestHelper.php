@@ -1,6 +1,6 @@
 <?php
 
-namespace Gifty\Tests\Common;
+namespace Gifty\Client\Tests\Common;
 
 trait TestHelper
 {

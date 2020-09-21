@@ -1,13 +1,13 @@
 <?php
 
-namespace Gifty\Tests\Services;
+namespace Gifty\Client\Tests\Services;
 
 use Gifty\Client\Exceptions\ApiException;
 use Gifty\Client\Resources\Collection;
 use Gifty\Client\Resources\GiftCard;
 use Gifty\Client\Resources\Transaction;
 use Gifty\Client\Services\GiftCardService;
-use Gifty\Tests\Common\TestHelper;
+use Gifty\Client\Tests\Common\TestHelper;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 

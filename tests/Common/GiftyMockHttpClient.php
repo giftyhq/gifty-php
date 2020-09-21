@@ -1,6 +1,6 @@
 <?php
 
-namespace Gifty\Tests\Common;
+namespace Gifty\Client\Tests\Common;
 
 use Gifty\Client\Exceptions\ApiException;
 use Gifty\Client\HttpClient\GiftyHttpClientInterface;

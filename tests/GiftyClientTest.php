@@ -1,6 +1,6 @@
 <?php
 
-namespace Gifty\Tests;
+namespace Gifty\Client\Tests;
 
 use Gifty\Client\GiftyClient;
 use PHPUnit\Framework\TestCase;

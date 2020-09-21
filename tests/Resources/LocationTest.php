@@ -1,10 +1,10 @@
 <?php
 
-namespace Gifty\Tests\Resources;
+namespace Gifty\Client\Tests\Resources;
 
 use Gifty\Client\Exceptions\MissingParameterException;
 use Gifty\Client\Resources\Location;
-use Gifty\Tests\Common\TestHelper;
+use Gifty\Client\Tests\Common\TestHelper;
 use PHPUnit\Framework\TestCase;
 
 /**

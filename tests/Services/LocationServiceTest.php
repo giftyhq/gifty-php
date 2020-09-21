@@ -1,11 +1,11 @@
 <?php
 
-namespace Gifty\Tests\Services;
+namespace Gifty\Client\Tests\Services;
 
 use Gifty\Client\Resources\Collection;
 use Gifty\Client\Resources\Location;
 use Gifty\Client\Services\LocationService;
-use Gifty\Tests\Common\TestHelper;
+use Gifty\Client\Tests\Common\TestHelper;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 

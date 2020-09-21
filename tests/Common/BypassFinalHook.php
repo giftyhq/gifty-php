@@ -1,6 +1,6 @@
 <?php
 
-namespace Gifty\Tests\Common;
+namespace Gifty\Client\Tests\Common;
 
 use DG\BypassFinals;
 use PHPUnit\Runner\BeforeTestHook;
