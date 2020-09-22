@@ -35,6 +35,7 @@ final class GiftyMockHttpClient implements GiftyHttpClientInterface
             [
                 'base_uri' => $endpoint,
                 'handler' => HandlerStack::create($this->mockHandler),
+                RequestOptions::HTTP_ERRORS => false,
                 RequestOptions::TIMEOUT => $timeout,
                 RequestOptions::CONNECT_TIMEOUT => $connectionTimeout,
                 RequestOptions::HEADERS => $headers,

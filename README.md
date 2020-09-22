@@ -38,6 +38,32 @@ $locations = $gifty->locations->all();
 $giftCard = $gifty->giftCards->get('ABCDABCDABCDABCD');
 ```
 
+### Issue a Gift Card
+
+```php
+$transaction = $gifty->giftCards->issue(
+  'ABCDABCDABCDABCD',
+  [
+    "amount" => 1250,
+    "currency" => "EUR",
+    "promotional" => false
+  ]
+);
+```
+
+### Redeem a Gift Card
+
+```php
+$transaction = $gifty->giftCards->redeem(
+  'ABCDABCDABCDABCD',
+  [
+    "amount" => 1250,
+    "currency" => "EUR",
+    "capture" => false
+  ]
+);
+```
+
 ### Retrieve all Transactions
 
 ```php
@@ -50,32 +76,6 @@ $transactions = $giftCard->transactions->all();
 ```php
 $giftCard = $gifty->giftCards->get('ABCDABCDABCDABCD');
 $transaction = $giftCard->transactions->get('tr_BV94pGgqRvgobxvrLX28jEl0');
-```
-
-### Issue a Gift Card
-
-```php
-$giftCard = $gifty->giftCards->get('ABCDABCDABCDABCD');
-$transaction = $giftCard->transactions->issue(
-  [
-    "amount" => 1250,
-    "currency" => "EUR",
-    "promotional" => false
-  ]
-);
-```
-
-### Redeem a Gift Card
-
-```php
-$giftCard = $gifty->giftCards->get('ABCDABCDABCDABCD');
-$transaction = $giftCard->transactions->redeem(
-  [
-    "amount" => 1250,
-    "currency" => "EUR",
-    "capture" => false
-  ]
-);
 ```
 
 ### Capture a Transaction

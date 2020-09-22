@@ -2,6 +2,7 @@
 
 namespace Gifty\Client\HttpClient;
 
+use Gifty\Client\Exceptions\ApiException;
 use Psr\Http\Message\ResponseInterface;
 
 interface GiftyHttpClientInterface
@@ -33,6 +34,7 @@ interface GiftyHttpClientInterface
      * @param string $path
      * @param array<string, bool|int|string> $options
      * @return ResponseInterface
+     * @throws ApiException
      */
     public function request(string $method, string $path, array $options = []): ResponseInterface;
 }

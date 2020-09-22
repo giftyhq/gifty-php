@@ -24,6 +24,7 @@ final class GiftyGuzzleHttpClient implements GiftyHttpClientInterface
         $this->guzzleClient = new Client(
             [
                 'base_uri' => $endpoint,
+                RequestOptions::HTTP_ERRORS => false,
                 RequestOptions::TIMEOUT => $timeout,
                 RequestOptions::CONNECT_TIMEOUT => $connectionTimeout,
                 RequestOptions::HEADERS => $headers,
