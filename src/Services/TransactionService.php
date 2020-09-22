@@ -40,34 +40,6 @@ final class TransactionService extends AbstractService
     }
 
     /**
-     * @param array<string,string|bool|int> $options
-     * @return Transaction
-     * @throws ApiException
-     */
-    public function redeem(array $options = []): Transaction
-    {
-        $path = $this->buildParentApiPath(['redeem']);
-        $response = $this->httpClient->request('POST', $path, $options);
-        $resources = $this->parseApiResponse($response);
-
-        return new Transaction($this->httpClient, (array)$resources);
-    }
-
-    /**
-     * @param array<string,string|bool|int> $options
-     * @return Transaction
-     * @throws ApiException
-     */
-    public function issue(array $options = []): Transaction
-    {
-        $path = $this->buildParentApiPath(['issue']);
-        $response = $this->httpClient->request('POST', $path, $options);
-        $resources = $this->parseApiResponse($response);
-
-        return new Transaction($this->httpClient, (array)$resources);
-    }
-
-    /**
      * @param string $transactionId
      * @param array<string,string|bool|int> $options
      * @return Transaction

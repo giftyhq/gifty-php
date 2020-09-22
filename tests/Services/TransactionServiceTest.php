@@ -68,67 +68,6 @@ final class TransactionServiceTest extends TestCase
         $giftCard->transactions->get("nonExistingTransactionId");
     }
 
-    public function testIssueGiftCard(): void
-    {
-        // Arrange
-        $transactionsData = (string) file_get_contents('./tests/Data/Transactions/Get.json');
-        $response = new Response(200, [], $transactionsData);
-        $giftCard = $this->buildGiftCardWithFollowUpResponse($response);
-
-        // Act
-        $transaction = $giftCard->transactions->issue(
-            [
-                "amount" => 1250,
-                "currency" => "EUR",
-                "promotional" => false
-            ]
-        );
-
-        // Assert
-        $this->assertInstanceOf(Transaction::class, $transaction);
-    }
-
-    public function testIssueGiftCardWithMissingParameter(): void
-    {
-        // Arrange
-        $transactionsData = (string) file_get_contents('./tests/Data/Transactions/ValidationError.json');
-        $response = new Response(200, [], $transactionsData);
-        $giftCard = $this->buildGiftCardWithFollowUpResponse($response);
-
-        // Assert
-        $this->expectException(ApiException::class);
-        $this->expectExceptionCode(422);
-        $this->expectDeprecationMessage('The promotional field is required.');
-
-        // Act
-        $giftCard->transactions->issue(
-            [
-                "amount" => 1250,
-                "currency" => "EUR"
-            ]
-        );
-    }
-
-    public function testRedeemGiftCard(): void
-    {
-        // Arrange
-        $transactionsData = (string) file_get_contents('./tests/Data/Transactions/Get.json');
-        $response = new Response(200, [], $transactionsData);
-        $giftCard = $this->buildGiftCardWithFollowUpResponse($response);
-
-        // Act
-        $transaction = $giftCard->transactions->redeem(
-            [
-                "amount" => 1250,
-                "currency" => "EUR",
-                "capture" => false
-            ]
-        );
-
-        // Assert
-        $this->assertInstanceOf(Transaction::class, $transaction);
-    }
-
     public function testCaptureTransaction(): void
     {
         // Arrange
@@ -156,7 +95,6 @@ final class TransactionServiceTest extends TestCase
         // Assert
         $this->assertInstanceOf(Transaction::class, $transaction);
     }
-
 
     private function buildGiftCardWithFollowUpResponse(Response $response): GiftCard
     {

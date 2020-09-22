@@ -3,7 +3,9 @@
 namespace Gifty\Client\Services;
 
 use Gifty\Client\Exceptions\ApiException;
+use Gifty\Client\Exceptions\MissingParameterException;
 use Gifty\Client\Resources\GiftCard;
+use Gifty\Client\Resources\Transaction;
 
 final class GiftCardService extends AbstractService
 {
@@ -30,8 +32,41 @@ final class GiftCardService extends AbstractService
 
         $resource = $this->parseApiResponse($response);
         $resource['code'] = $id;
-        $resourceClass = $this->getResourceClassPath();
 
-        return new $resourceClass($this->httpClient, (array)$resource);
+        return new GiftCard($this->httpClient, (array)$resource);
+    }
+
+    /**
+     * @param string $id
+     * @param array<string,string|bool|int> $options
+     * @return Transaction
+     * @throws ApiException
+     * @throws MissingParameterException
+     */
+    public function redeem(string $id, array $options = []): Transaction
+    {
+        $id = GiftCard::cleanCode($id);
+        $path = $this->buildApiPath([$id, 'redeem']);
+        $response = $this->httpClient->request('POST', $path, $options);
+        $resource = $this->parseApiResponse($response);
+
+        return new Transaction($this->httpClient, (array)$resource);
+    }
+
+    /**
+     * @param string $id
+     * @param array<string,string|bool|int> $options
+     * @return Transaction
+     * @throws ApiException
+     * @throws MissingParameterException
+     */
+    public function issue(string $id, array $options = []): Transaction
+    {
+        $id = GiftCard::cleanCode($id);
+        $path = $this->buildApiPath([$id, 'issue']);
+        $response = $this->httpClient->request('POST', $path, $options);
+        $resource = $this->parseApiResponse($response);
+
+        return new Transaction($this->httpClient, (array)$resource);
     }
 }
