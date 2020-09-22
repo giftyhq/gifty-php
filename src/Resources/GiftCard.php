@@ -44,6 +44,14 @@ final class GiftCard extends AbstractResource
         $this->transactions = new TransactionService($httpClient, $this);
     }
 
+    public static function cleanCode(string $code): string
+    {
+        $code = str_replace(' ', '', $code);
+        $code = str_replace('-', '', $code);
+
+        return $code;
+    }
+
     public function getId(): ?string
     {
         return $this->container['id'];

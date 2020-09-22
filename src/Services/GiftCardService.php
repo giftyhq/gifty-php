@@ -24,8 +24,7 @@ final class GiftCardService extends AbstractService
      */
     public function get(string $id): GiftCard
     {
-        $id = str_replace(' ', '', $id);
-        $id = str_replace('-', '', $id);
+        $id = GiftCard::cleanCode($id);
         $path = $this->buildApiPath([$id]);
         $response = $this->httpClient->request('GET', $path);
 
