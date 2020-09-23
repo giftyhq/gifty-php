@@ -34,11 +34,11 @@ final class GiftCard extends AbstractResource
 
         $this->container['id'] = $data['id'] ?? null;
         $this->container['code'] = $data['code'];
-        $this->container['balance'] = $data['balance'] ?? null;
+        $this->container['balance'] = $data['balance'] ?? 0;
         $this->container['currency'] = $data['currency'] ?? null;
         $this->container['promotional'] = $data['promotional'] ?? null;
-        $this->container['is_redeemable'] = $data['is_redeemable'] ?? null;
-        $this->container['is_issuable'] = $data['is_issuable'] ?? null;
+        $this->container['is_redeemable'] = $data['is_redeemable'] ?? false;
+        $this->container['is_issuable'] = $data['is_issuable'] ?? false;
         $this->container['created_at'] = $data['created_at'] ?? null;
         $this->container['transactions'] = $data['transactions'] ?? null;
         $this->transactions = new TransactionService($httpClient, $this);
@@ -57,7 +57,7 @@ final class GiftCard extends AbstractResource
         return $this->container['id'];
     }
 
-    public function getBalance(): ?int
+    public function getBalance(): int
     {
         return $this->container['balance'];
     }
