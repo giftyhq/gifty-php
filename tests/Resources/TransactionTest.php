@@ -39,16 +39,16 @@ final class TransactionTest extends TestCase
         $is_capturable = $transaction->isCapturable();
 
         // Assert
-        $this->assertEquals($expectedOutput['id'], $apiId);
-        $this->assertEquals($expectedOutput['id'], $id);
-        $this->assertEquals($expectedOutput['amount'], $amount);
-        $this->assertEquals($expectedOutput['currency'], $currency);
-        $this->assertEquals($expectedOutput['status'], $status);
-        $this->assertEquals($expectedOutput['type'], $type);
-        $this->assertEquals($expectedOutput['description'], $description);
-        $this->assertEquals($expectedOutput['captured_at'], $captured_at);
-        $this->assertEquals($expectedOutput['created_at'], $created_at);
-        $this->assertEquals($expectedOutput['is_capturable'], $is_capturable);
+        $this->assertSame($expectedOutput['id'], $apiId);
+        $this->assertSame($expectedOutput['id'], $id);
+        $this->assertSame($expectedOutput['amount'], $amount);
+        $this->assertSame($expectedOutput['currency'], $currency);
+        $this->assertSame($expectedOutput['status'], $status);
+        $this->assertSame($expectedOutput['type'], $type);
+        $this->assertSame($expectedOutput['description'], $description);
+        $this->assertSame($expectedOutput['captured_at'], $captured_at);
+        $this->assertSame($expectedOutput['created_at'], $created_at);
+        $this->assertSame($expectedOutput['is_capturable'], $is_capturable);
     }
 
     public function testRequireIdToBeProvided(): void
@@ -100,7 +100,7 @@ final class TransactionTest extends TestCase
                 ],
                 [
                     'id' => 'transactionId',
-                    'amount' => null,
+                    'amount' => 0,
                     'currency' => null,
                     'status' => null,
                     'type' => null,

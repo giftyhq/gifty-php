@@ -36,13 +36,13 @@ final class LocationTest extends TestCase
         $city = $location->getCity();
 
         // Assert
-        $this->assertEquals($expectedOutput['id'], $apiId);
-        $this->assertEquals($expectedOutput['id'], $id);
-        $this->assertEquals($expectedOutput['street'], $street);
-        $this->assertEquals($expectedOutput['house_number'], $houseNumber);
-        $this->assertEquals($expectedOutput['addition'], $addition);
-        $this->assertEquals($expectedOutput['postal_code'], $postalCode);
-        $this->assertEquals($expectedOutput['city'], $city);
+        $this->assertSame($expectedOutput['id'], $apiId);
+        $this->assertSame($expectedOutput['id'], $id);
+        $this->assertSame($expectedOutput['street'], $street);
+        $this->assertSame($expectedOutput['house_number'], $houseNumber);
+        $this->assertSame($expectedOutput['addition'], $addition);
+        $this->assertSame($expectedOutput['postal_code'], $postalCode);
+        $this->assertSame($expectedOutput['city'], $city);
     }
 
     public function testRequireIdToBeProvided(): void

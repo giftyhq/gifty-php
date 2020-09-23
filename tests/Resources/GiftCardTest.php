@@ -39,14 +39,14 @@ final class GiftCardTest extends TestCase
         $is_issuable = $giftCard->isIssuable();
 
         // Assert
-        $this->assertEquals($expectedOutput['apiId'], $apiId);
-        $this->assertEquals($expectedOutput['id'], $id);
-        $this->assertEquals($expectedOutput['balance'], $balance);
-        $this->assertEquals($expectedOutput['currency'], $currency);
-        $this->assertEquals($expectedOutput['promotional'], $promotional);
-        $this->assertEquals($expectedOutput['created_at'], $created_at);
-        $this->assertEquals($expectedOutput['is_redeemable'], $is_redeemable);
-        $this->assertEquals($expectedOutput['is_issuable'], $is_issuable);
+        $this->assertSame($expectedOutput['apiId'], $apiId);
+        $this->assertSame($expectedOutput['id'], $id);
+        $this->assertSame($expectedOutput['balance'], $balance);
+        $this->assertSame($expectedOutput['currency'], $currency);
+        $this->assertSame($expectedOutput['promotional'], $promotional);
+        $this->assertSame($expectedOutput['created_at'], $created_at);
+        $this->assertSame($expectedOutput['is_redeemable'], $is_redeemable);
+        $this->assertSame($expectedOutput['is_issuable'], $is_issuable);
     }
 
     public function testRequireCodeToBeProvided(): void
@@ -103,7 +103,7 @@ final class GiftCardTest extends TestCase
                 [
                     'apiId' => 'giftcardCode',
                     'id' => 'giftCardId',
-                    'balance' => null,
+                    'balance' => 0,
                     'currency' => 'EUR',
                     'promotional' => true,
                     'is_redeemable' => false,
@@ -122,8 +122,8 @@ final class GiftCardTest extends TestCase
                     'balance' => 0,
                     'currency' => null,
                     'promotional' => null,
-                    'is_redeemable' => null,
-                    'is_issuable' => null,
+                    'is_redeemable' => false,
+                    'is_issuable' => false,
                     'created_at' => null,
                 ],
             ],
