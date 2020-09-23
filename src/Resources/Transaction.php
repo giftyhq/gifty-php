@@ -19,12 +19,12 @@ final class Transaction extends AbstractResource
         parent::__construct($httpClient, $data);
 
         $this->container['id'] = $data['id'] ?? null;
-        $this->container['amount'] = $data['amount'] ?? null;
+        $this->container['amount'] = $data['amount'] ?? 0;
         $this->container['currency'] = $data['currency'] ?? null;
         $this->container['status'] = $data['status'] ?? null;
         $this->container['type'] = $data['type'] ?? null;
         $this->container['description'] = $data['description'] ?? null;
-        $this->container['is_capturable'] = $data['is_capturable'] ?? null;
+        $this->container['is_capturable'] = $data['is_capturable'] ?? false;
         $this->container['captured_at'] = $data['captured_at'] ?? null;
         $this->container['created_at'] = $data['created_at'] ?? null;
     }
@@ -34,7 +34,7 @@ final class Transaction extends AbstractResource
         return $this->container['id'];
     }
 
-    public function getAmount(): ?int
+    public function getAmount(): int
     {
         return $this->container['amount'];
     }
