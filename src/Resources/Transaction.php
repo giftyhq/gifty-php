@@ -34,7 +34,7 @@ final class Transaction extends AbstractResource
         return $this->container['id'];
     }
 
-    public function getAmount(): ?string
+    public function getAmount(): ?int
     {
         return $this->container['amount'];
     }
