@@ -6,7 +6,6 @@ use Gifty\Client\Exceptions\ApiException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Utils;
 use Psr\Http\Message\ResponseInterface;
 
 final class GiftyGuzzleHttpClient implements GiftyHttpClientInterface
@@ -40,9 +39,9 @@ final class GiftyGuzzleHttpClient implements GiftyHttpClientInterface
         $version = 'undefined';
 
         if (defined('\GuzzleHttp\ClientInterface::MAJOR_VERSION')) {
-            $version = \GuzzleHttp\ClientInterface::MAJOR_VERSION;
+            $version = constant('\GuzzleHttp\ClientInterface::MAJOR_VERSION');
         } elseif (defined('\GuzzleHttp\ClientInterface::VERSION')) {
-            $version = \GuzzleHttp\ClientInterface::VERSION;
+            $version = constant('\GuzzleHttp\ClientInterface::VERSION');
         }
 
         return sprintf('GuzzleHttp/%d', $version);
