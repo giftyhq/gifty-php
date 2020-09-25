@@ -6,7 +6,6 @@ use Gifty\Client\Exceptions\ApiException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Utils;
 use Psr\Http\Message\ResponseInterface;
 
 final class GiftyGuzzleHttpClient implements GiftyHttpClientInterface
@@ -37,7 +36,15 @@ final class GiftyGuzzleHttpClient implements GiftyHttpClientInterface
      */
     public static function getClientName(): string
     {
-        return Utils::defaultUserAgent();
+        $version = 'undefined';
+
+        if (defined('\GuzzleHttp\ClientInterface::MAJOR_VERSION')) {
+            $version = constant('\GuzzleHttp\ClientInterface::MAJOR_VERSION');
+        } elseif (defined('\GuzzleHttp\ClientInterface::VERSION')) {
+            $version = constant('\GuzzleHttp\ClientInterface::VERSION');
+        }
+
+        return sprintf('GuzzleHttp/%d', $version);
     }
 
     /**

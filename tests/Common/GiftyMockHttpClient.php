@@ -48,7 +48,15 @@ final class GiftyMockHttpClient implements GiftyHttpClientInterface
      */
     public static function getClientName(): string
     {
-        return Utils::defaultUserAgent();
+        $version = 'undefined';
+
+        if (defined('\GuzzleHttp\ClientInterface::MAJOR_VERSION')) {
+            $version = constant('\GuzzleHttp\ClientInterface::MAJOR_VERSION');
+        } elseif (defined('\GuzzleHttp\ClientInterface::VERSION')) {
+            $version = constant('\GuzzleHttp\ClientInterface::VERSION');
+        }
+
+        return sprintf('GuzzleHttp/%d', $version);
     }
 
     /**
