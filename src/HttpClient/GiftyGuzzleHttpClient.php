@@ -37,7 +37,15 @@ final class GiftyGuzzleHttpClient implements GiftyHttpClientInterface
      */
     public static function getClientName(): string
     {
-        return Utils::defaultUserAgent();
+        $version = 'undefined';
+
+        if (defined('\GuzzleHttp\ClientInterface::MAJOR_VERSION')) {
+            $version = \GuzzleHttp\ClientInterface::MAJOR_VERSION;
+        } elseif (defined('\GuzzleHttp\ClientInterface::VERSION')) {
+            $version = \GuzzleHttp\ClientInterface::VERSION;
+        }
+
+        return sprintf('GuzzleHttp/%d', $version);
     }
 
     /**
