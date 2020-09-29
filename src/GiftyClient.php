@@ -4,7 +4,7 @@ namespace Gifty\Client;
 
 use Gifty\Client\Exceptions\ApiException;
 use Gifty\Client\Factories\ServiceFactory;
-use Gifty\Client\HttpClient\GiftyGuzzleHttpClient;
+use Gifty\Client\HttpClient\GiftyHttpClient;
 use Gifty\Client\HttpClient\GiftyHttpClientInterface;
 use Gifty\Client\Services\GiftCardService;
 use Gifty\Client\Services\LocationService;
@@ -18,7 +18,7 @@ use Gifty\Client\Services\LocationService;
 final class GiftyClient
 {
     public const VERSION = '1.0.0';
-    private const USER_AGENT_FORMAT = 'Gifty/Gifty-PHP/%s/PHP/%s/Guzzle/%s';
+    private const USER_AGENT_FORMAT = 'Gifty/Gifty-PHP/%s/PHP/%s/%s';
 
     /**
      * @var string
@@ -77,8 +77,9 @@ final class GiftyClient
     }
 
     /**
-     * Set the HTTP client to our default (Guzzle) or
-     * use the user specified client
+     * Set the HTTP client to our default (Curl) or use the user
+     * specified client. This is useful for testing so we can use
+     * the Guzzle Mock client.
      * @param GiftyHttpClientInterface|null $httpClient
      * @return GiftyClient
      */
@@ -90,12 +91,12 @@ final class GiftyClient
             return $this;
         }
 
-        $this->httpClient = new GiftyGuzzleHttpClient(
+        $this->httpClient = new GiftyHttpClient(
             $this->apiEndpoint,
             10,
             2,
             [
-                'User-Agent' => $this->getUserAgent(GiftyGuzzleHttpClient::getClientName()),
+                'User-Agent' => $this->getUserAgent(GiftyHttpClient::getClientName()),
                 'Accept' => 'application/json',
             ]
         );

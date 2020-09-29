@@ -73,6 +73,13 @@ abstract class AbstractService
         $jsonString = $response->getBody()->getContents();
         $jsonObject = json_decode($jsonString);
 
+        if ($jsonObject === null) {
+            throw new ApiException(
+                sprintf('The server responded with error code %s.', $response->getStatusCode()),
+                $response->getStatusCode()
+            );
+        }
+
         if (property_exists($jsonObject, 'errors')) {
             $error = $jsonObject->errors[0];
 
