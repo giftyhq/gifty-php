@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Gifty\Client\GiftyClient
- * @uses   \Gifty\Client\HttpClient\GiftyGuzzleHttpClient
+ * @uses   \Gifty\Client\HttpClient\GiftyHttpClient
  */
 final class GiftyClientTest extends TestCase
 {
