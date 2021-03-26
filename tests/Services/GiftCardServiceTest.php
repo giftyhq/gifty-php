@@ -6,7 +6,7 @@ use Gifty\Client\Exceptions\ApiException;
 use Gifty\Client\Resources\GiftCard;
 use Gifty\Client\Resources\Transaction;
 use Gifty\Client\Services\GiftCardService;
-use Gifty\Client\Tests\Common\TestHelper;
+use Gifty\Client\Tests\Common\GiftyMockHttpClient;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 
@@ -19,7 +19,17 @@ use PHPUnit\Framework\TestCase;
  */
 final class GiftCardServiceTest extends TestCase
 {
-    use TestHelper;
+    /**
+     * @var GiftyMockHttpClient
+     */
+    protected $httpClient;
+
+    protected function setUp(): void
+    {
+        $this->httpClient = new GiftyMockHttpClient();
+
+        parent::setUp();
+    }
 
     public function testGiftCardGet(): void
     {
