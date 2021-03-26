@@ -105,7 +105,7 @@ final class GiftyHttpClient implements GiftyHttpClientInterface
     /**
      * @param string $response
      * @param array<array<string>> $headers
-     * @param resource $ch
+     * @param \CurlHandle $ch
      * @return ResponseInterface
      */
     private function buildPsrResponse(
