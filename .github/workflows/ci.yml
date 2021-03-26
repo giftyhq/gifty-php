@@ -7,6 +7,19 @@ on:
     branches: [ master ]
 
 jobs:
+  quality:
+      runs-on: ubuntu-latest
+
+      steps:
+      - uses: actions/checkout@v2
+
+      - name: Run phpstan
+        run: composer run-script phpstan
+
+      - name: Run phpcs
+        run: composer run-script phpcs
+
+
   build:
     runs-on: ubuntu-latest
 
@@ -42,4 +55,4 @@ jobs:
       run: composer install --prefer-dist --no-progress --no-suggest
 
     - name: Run test suite
-      run: composer run-script ci
+      run: composer run-script test

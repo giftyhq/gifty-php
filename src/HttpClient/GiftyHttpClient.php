@@ -108,8 +108,11 @@ final class GiftyHttpClient implements GiftyHttpClientInterface
      * @param resource $ch
      * @return ResponseInterface
      */
-    private function buildPsrResponse(string $response, array $headers, $ch): ResponseInterface
-    {
+    private function buildPsrResponse(
+        string $response,
+        array $headers,
+        $ch
+    ): ResponseInterface {
         $response = new HttpResponse(
             curl_getinfo($ch, CURLINFO_HTTP_CODE),
             '1.1',
