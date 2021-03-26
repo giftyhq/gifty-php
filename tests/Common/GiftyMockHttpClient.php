@@ -9,7 +9,6 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\RequestOptions;
-use GuzzleHttp\Utils;
 use Psr\Http\Message\ResponseInterface;
 
 final class GiftyMockHttpClient implements GiftyHttpClientInterface
@@ -28,8 +27,12 @@ final class GiftyMockHttpClient implements GiftyHttpClientInterface
     /**
      * @inheritDoc
      */
-    public function __construct(string $endpoint, int $timeout = 10, int $connectionTimeout = 2, array $headers = [])
-    {
+    public function __construct(
+        string $endpoint = 'https://api.gifty.nl/v1',
+        int $timeout = 10,
+        int $connectionTimeout = 2,
+        array $headers = []
+    ) {
         $this->mockHandler = new MockHandler();
         $this->guzzleClient = new Client(
             [

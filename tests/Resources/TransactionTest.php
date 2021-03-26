@@ -4,7 +4,7 @@ namespace Gifty\Client\Tests\Resources;
 
 use Gifty\Client\Exceptions\MissingParameterException;
 use Gifty\Client\Resources\Transaction;
-use Gifty\Client\Tests\Common\TestHelper;
+use Gifty\Client\Tests\Common\GiftyMockHttpClient;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -13,7 +13,17 @@ use PHPUnit\Framework\TestCase;
  */
 final class TransactionTest extends TestCase
 {
-    use TestHelper;
+    /**
+     * @var GiftyMockHttpClient
+     */
+    protected $httpClient;
+
+    protected function setUp(): void
+    {
+        $this->httpClient = new GiftyMockHttpClient();
+
+        parent::setUp();
+    }
 
     /**
      * @dataProvider transactionData
