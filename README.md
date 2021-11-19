@@ -3,7 +3,7 @@
 ![CI](https://github.com/giftyhq/gifty-php/workflows/CI/badge.svg?branch=master)
 [![License](https://poser.pugx.org/gifty/gifty-php/license)](//packagist.org/packages/gifty/gifty-php)
 
-PHP library for interacting with the Gifty API. This SDK is using the public [Gifty API](https://documenter.getpostman.com/view/3032027/RznEKynZ?version=latest) and enables you to:
+PHP library for interacting with the Gifty API. This SDK is using the public [Gifty API](https://docs.gifty.nl/api) and enables you to:
 - Accept gift cards in your webshop
 - Redeem and issue gift cards in your POS-system
 
@@ -17,7 +17,7 @@ The SDK is published on Packagist and can be installed using Composer.
 `composer require gifty/gifty-php`
 
 ## Getting Started
-Before starting it is recommended to read the documentation of the underlying [Gifty API](https://documenter.getpostman.com/view/3032027/RznEKynZ?version=latest) where all possible options to include are described.
+Before starting it is recommended to read the documentation of the underlying [Gifty API](https://docs.gifty.nl/api) where all possible options to include are described.
 
 Initializing the client and performing an API call is done as follows.
 
