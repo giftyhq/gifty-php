@@ -32,6 +32,12 @@ $giftCard = $gifty->giftCards->get('ABCDABCDABCDABCD');
 $locations = $gifty->locations->all();
 ```
 
+### Retrieve Packages
+
+```php
+$packages = $gifty->packages->all();
+```
+
 ### Retrieve a Gift Card
 
 ```php

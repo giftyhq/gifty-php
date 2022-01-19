@@ -16,7 +16,8 @@
       "promotional": false,
       "is_redeemable": true,
       "is_issuable": false,
-      "created_at": "2018-04-30T14:36:49+00:00"
+      "created_at": "2018-04-30T14:36:49+00:00",
+      "package": null
     }
   }
 }
