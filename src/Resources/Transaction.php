@@ -7,7 +7,6 @@ use Gifty\Client\HttpClient\GiftyHttpClientInterface;
 
 final class Transaction extends AbstractResource
 {
-
     /**
      * Transaction constructor.
      * @param GiftyHttpClientInterface $httpClient

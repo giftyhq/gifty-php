@@ -7,6 +7,7 @@
     "is_redeemable": true,
     "is_issuable": false,
     "created_at": "2018-09-25T11:25:03+00:00",
+    "package": null,
     "transactions": [
       {
         "id": "tr_BV94pGgqRvgobxvrLX28jEl0",

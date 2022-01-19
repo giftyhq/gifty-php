@@ -10,5 +10,4 @@ use ArrayObject;
  */
 final class Collection extends ArrayObject
 {
-
 }
