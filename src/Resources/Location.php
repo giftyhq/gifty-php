@@ -7,7 +7,6 @@ use Gifty\Client\HttpClient\GiftyHttpClientInterface;
 
 final class Location extends AbstractResource
 {
-
     /**
      * Location constructor.
      * @param GiftyHttpClientInterface $httpClient

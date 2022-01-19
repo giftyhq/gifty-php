@@ -7,7 +7,6 @@ use Gifty\Client\Resources\Collection;
 
 trait All
 {
-
     /**
      * @return Collection<AbstractResource>
      */

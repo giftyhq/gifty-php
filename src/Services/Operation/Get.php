@@ -6,7 +6,6 @@ use Gifty\Client\Resources\AbstractResource;
 
 trait Get
 {
-
     public function get(string $id): AbstractResource
     {
         $path = $this->buildApiPath([$id]);
