@@ -10,7 +10,7 @@ PHP library for interacting with the Gifty API. This SDK is using the public [Gi
 - Retrieve store locations
 
 ## Requirements
-- PHP 7.3.0 and later
+- PHP 7.5.0 and later
 - A valid API Key, that can be [generated](https://dashboard.gifty.nl/settings/company/developers) in your Gifty dashboard
 
 ## Installation
@@ -19,7 +19,7 @@ The SDK is published on Packagist and can be installed using Composer.
 `composer require gifty/gifty-php`
 
 ## Getting Started
-Before starting it is recommended to read the documentation of the underlying [Gifty API](https://docs.gifty.nl/api) where all possible options to include are described.
+Before starting, it is recommended to read the documentation of the underlying [Gifty API](https://docs.gifty.nl/api) where all possible options to include are described.
 
 Initializing the client and performing an API call is done as follows.
 
@@ -104,7 +104,7 @@ $transaction = $gifty->transactions->release('tr_BV94pGgqRvgobxvrLX28jEl0');
 ```
 
 ## Development
-Clone the Git repository so you have a local working copy.
+Clone the Git repository, so you have a local working copy.
 
 `git clone https://github.com/giftyhq/gifty-php`
 
