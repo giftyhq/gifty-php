@@ -10,7 +10,7 @@ PHP library for interacting with the Gifty API. This SDK is using the public [Gi
 - Retrieve store locations
 
 ## Requirements
-- PHP 7.5.0 and later
+- PHP 7.4.0 and later
 - A valid API Key, that can be [generated](https://dashboard.gifty.nl/settings/company/developers) in your Gifty dashboard
 
 ## Installation
