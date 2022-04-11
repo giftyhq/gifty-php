@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers   \Gifty\Client\Resources\GiftCard
  * @covers   \Gifty\Client\Resources\AbstractResource
- * @uses     \Gifty\Client\Services\TransactionService
+ * @uses     \Gifty\Client\Services\GiftCardTransactionService
  * @uses     \Gifty\Client\Services\AbstractService
  */
 final class GiftCardTest extends TestCase

@@ -12,7 +12,7 @@ use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Gifty\Client\Services\TransactionService
+ * @covers \Gifty\Client\Services\GiftCardTransactionService
  * @covers \Gifty\Client\Services\AbstractService
  * @uses   \Gifty\Client\Services\GiftCardService
  * @uses   \Gifty\Client\Resources\AbstractResource

@@ -2,18 +2,23 @@
 
 namespace Gifty\Client\Services\Operation;
 
+use Gifty\Client\Exceptions\ApiException;
 use Gifty\Client\Resources\AbstractResource;
 use Gifty\Client\Resources\Collection;
 
 trait All
 {
     /**
+     * @param array<string, string|bool|int|array> $options
      * @return Collection<AbstractResource>
+     * @throws ApiException
      */
-    public function all(): Collection
+    public function all(array $options = []): Collection
     {
         $path = $this->buildApiPath();
-        $response = $this->httpClient->request('GET', $path);
+        $response = $this->httpClient->request('GET', $path, [
+            'query' => $options,
+        ]);
         $resources = $this->parseApiResponse($response);
         $resourceClass = $this->getResourceClassPath();
         $collection = new Collection();

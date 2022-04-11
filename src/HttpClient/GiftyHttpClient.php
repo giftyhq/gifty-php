@@ -48,6 +48,30 @@ final class GiftyHttpClient implements GiftyHttpClientInterface
         $headers = $this->parseHeaders();
         $responseHeaders = [];
 
+        // Apply query parameters
+        // @see https://github.com/guzzle/guzzle/blob/82ca75f0b1f130f018febdda29af13086da5dbac/src/Client.php#L420
+        if (isset($options['query'])) {
+            $value = $options['query'];
+
+            if (\is_array($value)) {
+                $value = \http_build_query($value, '', '&', \PHP_QUERY_RFC3986);
+            }
+
+            if (!\is_string($value)) {
+                throw new \InvalidArgumentException('query must be a string or array');
+            }
+
+            $urlContainsQuery = parse_url($url, PHP_URL_QUERY);
+
+            if ($urlContainsQuery) {
+                $url .= '&' . $value;
+            } else {
+                $url .= '?' . $value;
+            }
+
+            unset($options['query']);
+        }
+
         $ch = curl_init();
         curl_setopt_array(
             $ch,

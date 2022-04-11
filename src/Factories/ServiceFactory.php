@@ -6,6 +6,8 @@ use Gifty\Client\HttpClient\GiftyHttpClientInterface;
 use Gifty\Client\Services\AbstractService;
 use Gifty\Client\Services\GiftCardService;
 use Gifty\Client\Services\LocationService;
+use Gifty\Client\Services\PackageService;
+use Gifty\Client\Services\TransactionService;
 
 final class ServiceFactory
 {
@@ -23,8 +25,10 @@ final class ServiceFactory
      * @var array<string, class-string>
      */
     protected static $classMap = [
-        'giftCards' => GiftCardService::class,
-        'locations' => LocationService::class,
+        'giftCards'    => GiftCardService::class,
+        'transactions' => TransactionService::class,
+        'locations'    => LocationService::class,
+        'packages'     => PackageService::class,
     ];
 
     /**

@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \Gifty\Client\Services\GiftCardService
  * @covers \Gifty\Client\Services\AbstractService
- * @uses   \Gifty\Client\Services\TransactionService
+ * @uses   \Gifty\Client\Services\GiftCardTransactionService
  * @uses   \Gifty\Client\Resources\AbstractResource
  * @uses   \Gifty\Client\Resources\GiftCard
  */

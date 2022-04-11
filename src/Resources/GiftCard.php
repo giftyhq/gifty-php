@@ -4,7 +4,7 @@ namespace Gifty\Client\Resources;
 
 use Gifty\Client\Exceptions\MissingParameterException;
 use Gifty\Client\HttpClient\GiftyHttpClientInterface;
-use Gifty\Client\Services\TransactionService;
+use Gifty\Client\Services\GiftCardTransactionService;
 
 /**
  * Class GiftCard
@@ -18,7 +18,10 @@ final class GiftCard extends AbstractResource
     protected $apiIdentifierField = 'code';
 
     /**
-     * @var TransactionService
+     * @var GiftCardTransactionService
+     * @deprecated 1.3.0 Retrieving transactions through the GiftCard object is deprecated. Please use
+     * $giftyClient->transactions instead.
+     * @see TransactionService
      */
     public $transactions;
 
@@ -41,7 +44,7 @@ final class GiftCard extends AbstractResource
         $this->container['is_issuable'] = $data['is_issuable'] ?? false;
         $this->container['created_at'] = $data['created_at'] ?? null;
         $this->container['transactions'] = $data['transactions'] ?? null;
-        $this->transactions = new TransactionService($httpClient, $this);
+        $this->transactions = new GiftCardTransactionService($httpClient, $this);
     }
 
     public static function cleanCode(string $code): string
