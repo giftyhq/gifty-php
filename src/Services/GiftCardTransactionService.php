@@ -42,7 +42,7 @@ final class GiftCardTransactionService extends AbstractService
     }
 
     /**
-     * @param array<string, string|bool|int|array> $options
+     * @param array<string, string|bool|int|array<string, string|int|null>> $options
      * @return Collection<AbstractResource>
      * @throws ApiException
      */

@@ -32,7 +32,7 @@ interface GiftyHttpClientInterface
     /**
      * @param string $method
      * @param string $path
-     * @param array<string, bool|int|string|array> $options
+     * @param array<string, array<string, int|bool|string|null>|int|bool|string|null> $options
      * @return ResponseInterface
      * @throws ApiException
      */

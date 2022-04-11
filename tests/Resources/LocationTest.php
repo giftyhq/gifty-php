@@ -68,7 +68,7 @@ final class LocationTest extends TestCase
     }
 
     /**
-     * @return array<array>
+     * @return array<int, array<int, array<string, string|null>>>
      */
     public function addressData(): array
     {

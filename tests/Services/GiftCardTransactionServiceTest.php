@@ -4,8 +4,9 @@ namespace Gifty\Client\Tests\Services;
 
 use Gifty\Client\Exceptions\ApiException;
 use Gifty\Client\Resources\Collection;
+use Gifty\Client\Resources\GiftCard;
 use Gifty\Client\Resources\Transaction;
-use Gifty\Client\Services\TransactionService;
+use Gifty\Client\Services\GiftCardService;
 use Gifty\Client\Tests\Common\GiftyMockHttpClient;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
@@ -18,7 +19,7 @@ use PHPUnit\Framework\TestCase;
  * @uses   \Gifty\Client\Resources\Transaction
  * @uses   \Gifty\Client\Resources\GiftCard
  */
-final class TransactionServiceTest extends TestCase
+final class GiftCardTransactionServiceTest extends TestCase
 {
     /**
      * @var GiftyMockHttpClient
@@ -35,32 +36,12 @@ final class TransactionServiceTest extends TestCase
     public function testTransactionsAreRetrievable(): void
     {
         // Arrange
-        $transactionsData = (string) file_get_contents('./tests/Data/Transactions/All.json');
-        $response = new Response(200, [], $transactionsData);
-        $this->httpClient->mockHandler->append($response);
-
-        // Act
-        $transactionService = new TransactionService($this->httpClient);
-        $transactions = $transactionService->all();
-
-        // Assert
-        $this->assertCount(2, $transactions);
-        $this->assertInstanceOf(Collection::class, $transactions);
-        $this->assertContainsOnlyInstancesOf(Transaction::class, $transactions);
-    }
-
-    public function testTransactionsAreFilterable(): void
-    {
-        // Arrange
         $transactionsData = (string) file_get_contents('./tests/Data/Transactions/AllFiltered.json');
         $response = new Response(200, [], $transactionsData);
-        $this->httpClient->mockHandler->append($response);
+        $giftCard = $this->buildGiftCardWithFollowUpResponse($response);
 
         // Act
-        $transactionService = new TransactionService($this->httpClient);
-        $transactions = $transactionService->all([
-            'giftcard' => 'gc_abc'
-        ]);
+        $transactions = $giftCard->transactions->all();
 
         // Assert
         $this->assertCount(1, $transactions);
@@ -73,11 +54,10 @@ final class TransactionServiceTest extends TestCase
         // Arrange
         $transactionsData = (string) file_get_contents('./tests/Data/Transactions/Get.json');
         $response = new Response(200, [], $transactionsData);
-        $this->httpClient->mockHandler->append($response);
+        $giftCard = $this->buildGiftCardWithFollowUpResponse($response);
 
         // Act
-        $transactionService = new TransactionService($this->httpClient);
-        $transaction = $transactionService->get("transactionId");
+        $transaction = $giftCard->transactions->get("transactionId");
 
         // Assert
         $this->assertInstanceOf(Transaction::class, $transaction);
@@ -88,15 +68,14 @@ final class TransactionServiceTest extends TestCase
         // Arrange
         $transactionsData = (string) file_get_contents('./tests/Data/Transactions/NotFound.json');
         $response = new Response(404, [], $transactionsData);
-        $this->httpClient->mockHandler->append($response);
+        $giftCard = $this->buildGiftCardWithFollowUpResponse($response);
 
         // Assert
         $this->expectExceptionCode(404);
         $this->expectException(ApiException::class);
 
         // Act
-        $transactionService = new TransactionService($this->httpClient);
-        $transactionService->get("nonExistingTransactionId");
+        $giftCard->transactions->get("nonExistingTransactionId");
     }
 
     public function testCaptureTransaction(): void
@@ -104,11 +83,10 @@ final class TransactionServiceTest extends TestCase
         // Arrange
         $transactionsData = (string) file_get_contents('./tests/Data/Transactions/Get.json');
         $response = new Response(200, [], $transactionsData);
-        $this->httpClient->mockHandler->append($response);
+        $giftCard = $this->buildGiftCardWithFollowUpResponse($response);
 
         // Act
-        $transactionService = new TransactionService($this->httpClient);
-        $transaction = $transactionService->capture('transactionId');
+        $transaction = $giftCard->transactions->capture('transactionId');
 
         // Assert
         $this->assertInstanceOf(Transaction::class, $transaction);
@@ -119,13 +97,26 @@ final class TransactionServiceTest extends TestCase
         // Arrange
         $transactionsData = (string) file_get_contents('./tests/Data/Transactions/Get.json');
         $response = new Response(200, [], $transactionsData);
-        $this->httpClient->mockHandler->append($response);
+        $giftCard = $this->buildGiftCardWithFollowUpResponse($response);
 
         // Act
-        $transactionService = new TransactionService($this->httpClient);
-        $transaction = $transactionService->release('transactionId');
+        $transaction = $giftCard->transactions->release('transactionId');
 
         // Assert
         $this->assertInstanceOf(Transaction::class, $transaction);
+    }
+
+    private function buildGiftCardWithFollowUpResponse(Response $response): GiftCard
+    {
+        $giftCardData = (string) file_get_contents('./tests/Data/GiftCards/Get.json');
+        $this->httpClient->mockHandler->append(new Response(200, [], $giftCardData));
+        $this->httpClient->mockHandler->append($response);
+
+        $giftCardService = new GiftCardService($this->httpClient);
+        $giftCard = $giftCardService->get('giftCardCode');
+
+        $this->assertInstanceOf(GiftCard::class, $giftCard);
+
+        return $giftCard;
     }
 }

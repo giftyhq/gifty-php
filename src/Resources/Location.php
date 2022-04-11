@@ -27,31 +27,31 @@ final class Location extends AbstractResource
 
     public function getId(): ?string
     {
-        return $this->container['id'];
+        return $this->container['id'] ? strval($this->container['id']) : null;
     }
 
     public function getStreet(): ?string
     {
-        return $this->container['street'];
+        return $this->container['street'] ? strval($this->container['street']) : null;
     }
 
     public function getHouseNumber(): ?string
     {
-        return $this->container['house_number'];
+        return $this->container['house_number'] ? strval($this->container['house_number']) : null;
     }
 
     public function getAddition(): ?string
     {
-        return $this->container['addition'];
+        return $this->container['addition'] ? strval($this->container['addition']) : null;
     }
 
     public function getPostalCode(): ?string
     {
-        return $this->container['postal_code'];
+        return $this->container['postal_code'] ? strval($this->container['postal_code']) : null;
     }
 
     public function getCity(): ?string
     {
-        return $this->container['city'];
+        return $this->container['city'] ? strval($this->container['city']) : null;
     }
 }

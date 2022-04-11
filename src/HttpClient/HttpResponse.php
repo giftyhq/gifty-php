@@ -10,15 +10,15 @@ final class HttpResponse implements ResponseInterface
     /**
      * @var int
      */
-    private $statusCode;
+    private int $statusCode;
     /**
      * @var string
      */
-    private $body;
+    private string $body;
     /**
      * @var string
      */
-    private $protocolVersion;
+    private string $protocolVersion;
     /**
      * @var array<array<string>>
      */
@@ -74,7 +74,7 @@ final class HttpResponse implements ResponseInterface
 
     public function getHeaderLine($name)
     {
-        return implode(',', $this->headers);
+        return implode(',', $this->getHeader($name));
     }
 
     public function withHeader($name, $value)

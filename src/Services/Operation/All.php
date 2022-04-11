@@ -9,7 +9,7 @@ use Gifty\Client\Resources\Collection;
 trait All
 {
     /**
-     * @param array<string, string|bool|int|array> $options
+     * @param array<string, int|bool|string|null> $options
      * @return Collection<AbstractResource>
      * @throws ApiException
      */

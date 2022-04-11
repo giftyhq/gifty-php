@@ -15,7 +15,7 @@ final class GiftCard extends AbstractResource
     /**
      * @var string
      */
-    protected $apiIdentifierField = 'code';
+    protected string $apiIdentifierField = 'code';
 
     /**
      * @var GiftCardTransactionService
@@ -23,7 +23,7 @@ final class GiftCard extends AbstractResource
      * $giftyClient->transactions instead.
      * @see TransactionService
      */
-    public $transactions;
+    public GiftCardTransactionService $transactions;
 
     /**
      * GiftCard constructor.
@@ -57,27 +57,31 @@ final class GiftCard extends AbstractResource
 
     public function getId(): ?string
     {
-        return $this->container['id'];
+        return $this->container['id'] ? strval($this->container['id']) : null;
     }
 
     public function getBalance(): int
     {
-        return $this->container['balance'];
+        return intval($this->container['balance']);
     }
 
     public function getCurrency(): ?string
     {
-        return $this->container['currency'];
+        return $this->container['currency'] ? strval($this->container['currency']) : null;
     }
 
     public function getPromotional(): ?bool
     {
-        return $this->container['promotional'];
+        if ($this->container['promotional'] === null) {
+            return null;
+        }
+
+        return boolval($this->container['promotional']);
     }
 
     public function getCreatedAt(): ?string
     {
-        return $this->container['created_at'];
+        return $this->container['created_at'] ? strval($this->container['created_at']) : null;
     }
 
     public function isRedeemable(): bool

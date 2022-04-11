@@ -14,7 +14,7 @@ final class ServiceFactory
     /**
      * @var GiftyHttpClientInterface
      */
-    private $httpClient;
+    private GiftyHttpClientInterface $httpClient;
 
     /**
      * @var array<AbstractService>
@@ -22,7 +22,7 @@ final class ServiceFactory
     private $services;
 
     /**
-     * @var array<string, class-string>
+     * @var array<string, class-string<AbstractService>>
      */
     protected static $classMap = [
         'giftCards'    => GiftCardService::class,
