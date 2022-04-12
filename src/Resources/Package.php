@@ -27,31 +27,31 @@ final class Package extends AbstractResource
 
     public function getId(): ?string
     {
-        return $this->container['id'];
+        return $this->container['id'] ? strval($this->container['id']) : null;
     }
 
     public function getTitle(): ?string
     {
-        return $this->container['title'];
+        return $this->container['title'] ? strval($this->container['title']) : null;
     }
 
     public function getDescription(): ?string
     {
-        return $this->container['description'];
+        return $this->container['description'] ? strval($this->container['description']) : null;
     }
 
     public function getAmount(): int
     {
-        return $this->container['amount'];
+        return intval($this->container['amount']);
     }
 
     public function getCurrency(): ?string
     {
-        return $this->container['currency'];
+        return $this->container['currency'] ? strval($this->container['currency']) : null;
     }
 
     public function getActive(): bool
     {
-        return $this->container['active'];
+        return boolval($this->container['active']);
     }
 }

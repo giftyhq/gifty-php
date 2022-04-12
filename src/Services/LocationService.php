@@ -9,7 +9,7 @@ use Gifty\Client\Services\Operation\All;
 /**
  * Class LocationService
  * @package Gifty\Client\Service
- * @method Location[]|Collection all()
+ * @method Location[]|Collection all(array $options = [])
  */
 final class LocationService extends AbstractService
 {

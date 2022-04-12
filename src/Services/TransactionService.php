@@ -3,9 +3,7 @@
 namespace Gifty\Client\Services;
 
 use Gifty\Client\Exceptions\ApiException;
-use Gifty\Client\HttpClient\GiftyHttpClientInterface;
 use Gifty\Client\Resources\Collection;
-use Gifty\Client\Resources\GiftCard;
 use Gifty\Client\Resources\Transaction;
 use Gifty\Client\Services\Operation\All;
 use Gifty\Client\Services\Operation\Get;
@@ -13,7 +11,7 @@ use Gifty\Client\Services\Operation\Get;
 /**
  * Class TransactionService
  * @package Gifty\Client\Service
- * @method Transaction[]|Collection all()
+ * @method Transaction[]|Collection all(array $options = [])
  * @method Transaction get(string $id)
  */
 final class TransactionService extends AbstractService
@@ -22,17 +20,6 @@ final class TransactionService extends AbstractService
     use Get;
 
     protected const API_PATH = 'transactions';
-    protected const API_PATH_PARENT = 'giftcards';
-
-    /**
-     * TransactionsService constructor.
-     * @param GiftyHttpClientInterface $httpClient
-     * @param GiftCard $parentResource
-     */
-    public function __construct(GiftyHttpClientInterface $httpClient, GiftCard $parentResource)
-    {
-        parent::__construct($httpClient, $parentResource);
-    }
 
     protected function getResourceClassPath(): string
     {

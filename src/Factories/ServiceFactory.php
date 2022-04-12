@@ -6,25 +6,29 @@ use Gifty\Client\HttpClient\GiftyHttpClientInterface;
 use Gifty\Client\Services\AbstractService;
 use Gifty\Client\Services\GiftCardService;
 use Gifty\Client\Services\LocationService;
+use Gifty\Client\Services\PackageService;
+use Gifty\Client\Services\TransactionService;
 
 final class ServiceFactory
 {
     /**
      * @var GiftyHttpClientInterface
      */
-    private $httpClient;
+    private GiftyHttpClientInterface $httpClient;
 
     /**
      * @var array<AbstractService>
      */
-    private $services;
+    private array $services;
 
     /**
-     * @var array<string, class-string>
+     * @var array<string, class-string<AbstractService>>
      */
     protected static $classMap = [
-        'giftCards' => GiftCardService::class,
-        'locations' => LocationService::class,
+        'giftCards'    => GiftCardService::class,
+        'transactions' => TransactionService::class,
+        'locations'    => LocationService::class,
+        'packages'     => PackageService::class,
     ];
 
     /**
@@ -37,6 +41,10 @@ final class ServiceFactory
         $this->services = [];
     }
 
+    /**
+     * @param string $name
+     * @return AbstractService|null
+     */
     public function __get(string $name): ?AbstractService
     {
         if (array_key_exists($name, self::$classMap) === false) {

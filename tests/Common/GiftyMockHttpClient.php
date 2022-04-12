@@ -17,12 +17,12 @@ final class GiftyMockHttpClient implements GiftyHttpClientInterface
     /**
      * @var Client
      */
-    private $guzzleClient;
+    private Client $guzzleClient;
 
     /**
      * @var MockHandler
      */
-    public $mockHandler;
+    public MockHandler $mockHandler;
 
     /**
      * @inheritDoc
@@ -51,7 +51,7 @@ final class GiftyMockHttpClient implements GiftyHttpClientInterface
      */
     public static function getClientName(): string
     {
-        $version = 'undefined';
+        $version = 0;
 
         if (defined('\GuzzleHttp\ClientInterface::MAJOR_VERSION')) {
             $version = constant('\GuzzleHttp\ClientInterface::MAJOR_VERSION');
@@ -59,7 +59,7 @@ final class GiftyMockHttpClient implements GiftyHttpClientInterface
             $version = constant('\GuzzleHttp\ClientInterface::VERSION');
         }
 
-        return sprintf('GuzzleHttp/%d', $version);
+        return sprintf('GuzzleHttp/%d', intval($version));
     }
 
     /**
@@ -67,6 +67,7 @@ final class GiftyMockHttpClient implements GiftyHttpClientInterface
      */
     public function setAccessToken(string $token): void
     {
+        /** @var array<string, array<string, string>> $configuration */
         $configuration = $this->guzzleClient->getConfig();
         $configuration[RequestOptions::HEADERS]['Authorization'] = 'Bearer ' . $token;
 
@@ -74,11 +75,7 @@ final class GiftyMockHttpClient implements GiftyHttpClientInterface
     }
 
     /**
-     * @param string $method
-     * @param string $path
-     * @param array<string, bool|int|string> $options
-     * @return ResponseInterface
-     * @throws ApiException
+     * @inheritDoc
      */
     public function request(string $method, string $path, array $options = []): ResponseInterface
     {

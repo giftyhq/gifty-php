@@ -9,7 +9,7 @@ use Gifty\Client\Services\Operation\All;
 /**
  * Class PackageService
  * @package Gifty\Client\Service
- * @method Package[]|Collection all()
+ * @method Package[]|Collection all(array $options = [])
  */
 final class PackageService extends AbstractService
 {

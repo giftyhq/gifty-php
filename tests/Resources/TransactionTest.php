@@ -74,7 +74,7 @@ final class TransactionTest extends TestCase
     }
 
     /**
-     * @return array<array>
+     * @return array<int, array<int, array<string, bool|int|string|null>>>
      */
     public function transactionData(): array
     {

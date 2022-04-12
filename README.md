@@ -6,9 +6,11 @@
 PHP library for interacting with the Gifty API. This SDK is using the public [Gifty API](https://docs.gifty.nl/api) and enables you to:
 - Accept gift cards in your webshop
 - Redeem and issue gift cards in your POS-system
+- Retrieve gift card packages
+- Retrieve store locations
 
 ## Requirements
-- PHP 7.3.0 and later
+- PHP 7.4.0 and later
 - A valid API Key, that can be [generated](https://dashboard.gifty.nl/settings/company/developers) in your Gifty dashboard
 
 ## Installation
@@ -17,7 +19,7 @@ The SDK is published on Packagist and can be installed using Composer.
 `composer require gifty/gifty-php`
 
 ## Getting Started
-Before starting it is recommended to read the documentation of the underlying [Gifty API](https://docs.gifty.nl/api) where all possible options to include are described.
+Before starting, it is recommended to read the documentation of the underlying [Gifty API](https://docs.gifty.nl/api) where all possible options to include are described.
 
 Initializing the client and performing an API call is done as follows.
 
@@ -73,34 +75,36 @@ $transaction = $gifty->giftCards->redeem(
 ### Retrieve all Transactions
 
 ```php
-$giftCard = $gifty->giftCards->get('ABCDABCDABCDABCD');
-$transactions = $giftCard->transactions->all();
+$transactions = $gifty->transactions->all(['limit' => 5]);
+```
+
+### Retrieve all Transactions filtered by gift card ID
+
+```php
+$transactions = $gifty->transactions->all(['giftcard' => 'gc_123456789']);
 ```
 
 ### Retrieve a Transaction
 
 ```php
-$giftCard = $gifty->giftCards->get('ABCDABCDABCDABCD');
-$transaction = $giftCard->transactions->get('tr_BV94pGgqRvgobxvrLX28jEl0');
+$transaction = $gifty->transactions->get('tr_BV94pGgqRvgobxvrLX28jEl0');
 ```
 
 ### Capture a Transaction
 
 ```php
-$giftCard = $gifty->giftCards->get('ABCDABCDABCDABCD');
-$transaction = $giftCard->transactions->capture('tr_BV94pGgqRvgobxvrLX28jEl0');
+$transaction = $gifty->transactions->capture('tr_BV94pGgqRvgobxvrLX28jEl0');
 ```
 
 
 ### Release a Transaction
 
 ```php
-$giftCard = $gifty->giftCards->get('ABCDABCDABCDABCD');
-$transaction = $giftCard->transactions->release('tr_BV94pGgqRvgobxvrLX28jEl0');
+$transaction = $gifty->transactions->release('tr_BV94pGgqRvgobxvrLX28jEl0');
 ```
 
 ## Development
-Clone the Git repository so you have a local working copy.
+Clone the Git repository, so you have a local working copy.
 
 `git clone https://github.com/giftyhq/gifty-php`
 

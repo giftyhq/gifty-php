@@ -4,7 +4,7 @@ namespace Gifty\Client\Resources;
 
 use Gifty\Client\Exceptions\MissingParameterException;
 use Gifty\Client\HttpClient\GiftyHttpClientInterface;
-use Gifty\Client\Services\TransactionService;
+use Gifty\Client\Services\GiftCardTransactionService;
 
 /**
  * Class GiftCard
@@ -15,12 +15,15 @@ final class GiftCard extends AbstractResource
     /**
      * @var string
      */
-    protected $apiIdentifierField = 'code';
+    protected string $apiIdentifierField = 'code';
 
     /**
-     * @var TransactionService
+     * @var GiftCardTransactionService
+     * @deprecated 1.3.0 Retrieving transactions through the GiftCard object is deprecated. Please use
+     * $giftyClient->transactions instead.
+     * @see TransactionService
      */
-    public $transactions;
+    public GiftCardTransactionService $transactions;
 
     /**
      * GiftCard constructor.
@@ -41,40 +44,42 @@ final class GiftCard extends AbstractResource
         $this->container['is_issuable'] = $data['is_issuable'] ?? false;
         $this->container['created_at'] = $data['created_at'] ?? null;
         $this->container['transactions'] = $data['transactions'] ?? null;
-        $this->transactions = new TransactionService($httpClient, $this);
+        $this->transactions = new GiftCardTransactionService($httpClient, $this);
     }
 
     public static function cleanCode(string $code): string
     {
         $code = str_replace(' ', '', $code);
-        $code = str_replace('-', '', $code);
-
-        return $code;
+        return str_replace('-', '', $code);
     }
 
     public function getId(): ?string
     {
-        return $this->container['id'];
+        return $this->container['id'] ? strval($this->container['id']) : null;
     }
 
     public function getBalance(): int
     {
-        return $this->container['balance'];
+        return intval($this->container['balance']);
     }
 
     public function getCurrency(): ?string
     {
-        return $this->container['currency'];
+        return $this->container['currency'] ? strval($this->container['currency']) : null;
     }
 
     public function getPromotional(): ?bool
     {
-        return $this->container['promotional'];
+        if ($this->container['promotional'] === null) {
+            return null;
+        }
+
+        return boolval($this->container['promotional']);
     }
 
     public function getCreatedAt(): ?string
     {
-        return $this->container['created_at'];
+        return $this->container['created_at'] ? strval($this->container['created_at']) : null;
     }
 
     public function isRedeemable(): bool

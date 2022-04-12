@@ -15,12 +15,12 @@ abstract class AbstractService
     /**
      * @var GiftyHttpClientInterface
      */
-    protected $httpClient;
+    protected GiftyHttpClientInterface $httpClient;
 
     /**
      * @var AbstractResource|null
      */
-    private $parentResource;
+    private ?AbstractResource $parentResource;
 
     /**
      * GiftCardsService constructor.
@@ -33,6 +33,9 @@ abstract class AbstractService
         $this->parentResource = $parentResource;
     }
 
+    /**
+     * @return class-string<AbstractResource>
+     */
     abstract protected function getResourceClassPath(): string;
 
     /**
@@ -80,10 +83,24 @@ abstract class AbstractService
             );
         }
 
+        if (is_object($jsonObject) === false) {
+            throw new ApiException(
+                'The server response can\'t be parsed.',
+                $response->getStatusCode()
+            );
+        }
+
         if (property_exists($jsonObject, 'errors')) {
             $error = $jsonObject->errors[0];
 
             throw new ApiException($error->detail, $error->status);
+        }
+
+        if (property_exists($jsonObject, 'data') === false) {
+            throw new ApiException(
+                'The server response doesn\'t contain data.',
+                $response->getStatusCode()
+            );
         }
 
         return (array)$jsonObject->data;

@@ -30,42 +30,42 @@ final class Transaction extends AbstractResource
 
     public function getId(): ?string
     {
-        return $this->container['id'];
+        return $this->container['id'] ? strval($this->container['id']) : null;
     }
 
     public function getAmount(): int
     {
-        return $this->container['amount'];
+        return intval($this->container['amount']);
     }
 
     public function getCurrency(): ?string
     {
-        return $this->container['currency'];
+        return $this->container['currency'] ? strval($this->container['currency']) : null;
     }
 
     public function getStatus(): ?string
     {
-        return $this->container['status'];
+        return $this->container['status'] ? strval($this->container['status']) : null;
     }
 
     public function getType(): ?string
     {
-        return $this->container['type'];
+        return $this->container['type'] ? strval($this->container['type']) : null;
     }
 
     public function getDescription(): ?string
     {
-        return $this->container['description'];
+        return $this->container['description'] ? strval($this->container['description']) : null;
     }
 
     public function getCapturedAt(): ?string
     {
-        return $this->container['captured_at'];
+        return $this->container['captured_at'] ? strval($this->container['captured_at']) : null;
     }
 
     public function getCreatedAt(): ?string
     {
-        return $this->container['created_at'];
+        return $this->container['created_at'] ? strval($this->container['created_at']) : null;
     }
 
     public function isCapturable(): bool

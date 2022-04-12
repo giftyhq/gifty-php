@@ -2,6 +2,7 @@
 
 namespace Gifty\Client\HttpClient;
 
+use InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 
 final class GiftyHttpClient implements GiftyHttpClientInterface
@@ -9,19 +10,19 @@ final class GiftyHttpClient implements GiftyHttpClientInterface
     /**
      * @var array<string>
      */
-    private $headers;
+    private array $headers;
     /**
      * @var string
      */
-    private $endpoint;
+    private string $endpoint;
     /**
      * @var int
      */
-    private $timeout;
+    private int $timeout;
     /**
      * @var int
      */
-    private $connectionTimeout;
+    private int $connectionTimeout;
 
     public function __construct(string $endpoint, int $timeout = 10, int $connectionTimeout = 2, array $headers = [])
     {
@@ -31,22 +32,55 @@ final class GiftyHttpClient implements GiftyHttpClientInterface
         $this->headers = $headers;
     }
 
+    /**
+     * @inheritDoc
+     */
     public static function getClientName(): string
     {
         return 'GiftyHttpClient';
     }
 
-    public function setAccessToken(string $token)
+    /**
+     * @inheritDoc
+     */
+    public function setAccessToken(string $token): void
     {
         $this->headers['Authorization'] = 'Bearer ' . $token;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function request(string $method, string $path, array $options = []): ResponseInterface
     {
         $url = $this->endpoint . $path;
         $this->headers['Content-Type'] = 'application/json';
         $headers = $this->parseHeaders();
         $responseHeaders = [];
+
+        // Apply query parameters
+        // @see https://github.com/guzzle/guzzle/blob/82ca75f0b1f130f018febdda29af13086da5dbac/src/Client.php#L420
+        if (isset($options['query'])) {
+            $value = $options['query'];
+
+            if (is_array($value)) {
+                $value = http_build_query($value, '', '&', PHP_QUERY_RFC3986);
+            }
+
+            if (!is_string($value)) {
+                throw new InvalidArgumentException('query must be a string or array');
+            }
+
+            $urlContainsQuery = parse_url($url, PHP_URL_QUERY);
+
+            if ($urlContainsQuery) {
+                $url .= '&' . $value;
+            } else {
+                $url .= '?' . $value;
+            }
+
+            unset($options['query']);
+        }
 
         $ch = curl_init();
         curl_setopt_array(
@@ -110,13 +144,11 @@ final class GiftyHttpClient implements GiftyHttpClientInterface
      */
     private function buildPsrResponse(string $response, array $headers, $ch): ResponseInterface
     {
-        $response = new HttpResponse(
+        return new HttpResponse(
             curl_getinfo($ch, CURLINFO_HTTP_CODE),
             '1.1',
             $response,
             $headers
         );
-
-        return $response;
     }
 }

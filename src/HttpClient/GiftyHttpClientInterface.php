@@ -25,14 +25,14 @@ interface GiftyHttpClientInterface
 
     /**
      * @param string $token
-     * @return mixed
+     * @return void
      */
-    public function setAccessToken(string $token);
+    public function setAccessToken(string $token): void;
 
     /**
      * @param string $method
      * @param string $path
-     * @param array<string, bool|int|string> $options
+     * @param array<string, array<string, int|bool|string|null>|int|bool|string|null> $options
      * @return ResponseInterface
      * @throws ApiException
      */

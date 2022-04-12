@@ -8,32 +8,36 @@ use Gifty\Client\HttpClient\GiftyHttpClient;
 use Gifty\Client\HttpClient\GiftyHttpClientInterface;
 use Gifty\Client\Services\GiftCardService;
 use Gifty\Client\Services\LocationService;
+use Gifty\Client\Services\PackageService;
+use Gifty\Client\Services\TransactionService;
 
 /**
  * Class GiftyClient
  * @package Gifty\Client
  * @property GiftCardService $giftCards
+ * @property TransactionService $transactions
  * @property LocationService $locations
+ * @property PackageService $packages
  */
 final class GiftyClient
 {
-    public const VERSION = '1.0.0';
+    public const VERSION = '1.3.0';
     private const USER_AGENT_FORMAT = 'Gifty/Gifty-PHP/%s/PHP/%s/%s';
 
     /**
      * @var string
      */
-    private $apiEndpoint = 'https://api.gifty.nl/v1/';
+    private string $apiEndpoint = 'https://api.gifty.nl/v1/';
 
     /**
      * @var GiftyHttpClientInterface
      */
-    private $httpClient;
+    private GiftyHttpClientInterface $httpClient;
 
     /**
      * @var ServiceFactory
      */
-    private $serviceFactory;
+    private ServiceFactory $serviceFactory;
 
     /**
      * GiftyClient constructor.
@@ -41,7 +45,7 @@ final class GiftyClient
      * @param array<string, string> $options
      * @param GiftyHttpClientInterface|null $httpClient
      */
-    public function __construct(string $apiKey, $options = [], ?GiftyHttpClientInterface $httpClient = null)
+    public function __construct(string $apiKey, array $options = [], ?GiftyHttpClientInterface $httpClient = null)
     {
         if (isset($options['api_endpoint'])) {
             $this->setApiEndpoint($options['api_endpoint']);
@@ -53,12 +57,11 @@ final class GiftyClient
 
     /**
      * @param string $name
-     *
-     * @return mixed|null
+     * @return Services\AbstractService|null
      */
     public function __get(string $name)
     {
-        if (null === $this->serviceFactory) {
+        if (false === isset($this->serviceFactory)) {
             $this->serviceFactory = new ServiceFactory($this->httpClient);
         }
 
@@ -78,7 +81,7 @@ final class GiftyClient
 
     /**
      * Set the HTTP client to our default (Curl) or use the user
-     * specified client. This is useful for testing so we can use
+     * specified client. This is useful for testing, so we can use
      * the Guzzle Mock client.
      * @param GiftyHttpClientInterface|null $httpClient
      * @return GiftyClient
