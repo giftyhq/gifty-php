@@ -98,7 +98,7 @@ abstract class AbstractService
 
         if (property_exists($jsonObject, 'data') === false) {
             throw new ApiException(
-                'The server response doen\'t contain data.',
+                'The server response doesn\'t contain data.',
                 $response->getStatusCode()
             );
         }

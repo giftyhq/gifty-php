@@ -27,17 +27,17 @@ final class GiftyClient
     /**
      * @var string
      */
-    private $apiEndpoint = 'https://api.gifty.nl/v1/';
+    private string $apiEndpoint = 'https://api.gifty.nl/v1/';
 
     /**
      * @var GiftyHttpClientInterface
      */
-    private $httpClient;
+    private GiftyHttpClientInterface $httpClient;
 
     /**
      * @var ServiceFactory
      */
-    private $serviceFactory;
+    private ServiceFactory $serviceFactory;
 
     /**
      * GiftyClient constructor.
@@ -57,12 +57,11 @@ final class GiftyClient
 
     /**
      * @param string $name
-     *
-     * @return mixed|null
+     * @return Services\AbstractService|null
      */
     public function __get(string $name)
     {
-        if (null === $this->serviceFactory) {
+        if (false === isset($this->serviceFactory)) {
             $this->serviceFactory = new ServiceFactory($this->httpClient);
         }
 

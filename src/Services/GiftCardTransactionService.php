@@ -22,7 +22,7 @@ final class GiftCardTransactionService extends AbstractService
     /**
      * @var GiftCard
      */
-    private $giftCard;
+    private GiftCard $giftCard;
 
     /**
      * TransactionsService constructor.
@@ -36,6 +36,9 @@ final class GiftCardTransactionService extends AbstractService
         parent::__construct($httpClient, $parentResource);
     }
 
+    /**
+     * @return string
+     */
     protected function getResourceClassPath(): string
     {
         return Transaction::class;
@@ -55,6 +58,11 @@ final class GiftCardTransactionService extends AbstractService
         ], $options));
     }
 
+    /**
+     * @param string $id
+     * @return AbstractResource
+     * @throws ApiException
+     */
     public function get(string $id): AbstractResource
     {
         $transactionService = new TransactionService($this->httpClient);

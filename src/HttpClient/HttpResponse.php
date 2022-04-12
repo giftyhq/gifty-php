@@ -22,7 +22,7 @@ final class HttpResponse implements ResponseInterface
     /**
      * @var array<array<string>>
      */
-    private $headers;
+    private array $headers;
 
     /**
      * HttpResponse constructor.
@@ -43,27 +43,27 @@ final class HttpResponse implements ResponseInterface
         $this->headers = $headers;
     }
 
-    public function getProtocolVersion()
+    public function getProtocolVersion(): string
     {
         return $this->protocolVersion;
     }
 
-    public function withProtocolVersion($version)
+    public function withProtocolVersion($version): self
     {
         return $this;
     }
 
-    public function getHeaders()
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    public function hasHeader($name)
+    public function hasHeader($name): bool
     {
         return array_key_exists($name, $this->headers);
     }
 
-    public function getHeader($name)
+    public function getHeader($name): array
     {
         if ($this->hasHeader($name) === false) {
             return [];
@@ -72,47 +72,47 @@ final class HttpResponse implements ResponseInterface
         return $this->headers[$name];
     }
 
-    public function getHeaderLine($name)
+    public function getHeaderLine($name): string
     {
         return implode(',', $this->getHeader($name));
     }
 
-    public function withHeader($name, $value)
+    public function withHeader($name, $value): self
     {
         return $this;
     }
 
-    public function withAddedHeader($name, $value)
+    public function withAddedHeader($name, $value): self
     {
         return $this;
     }
 
-    public function withoutHeader($name)
+    public function withoutHeader($name): self
     {
         return $this;
     }
 
-    public function getBody()
+    public function getBody(): Stream
     {
         return new Stream($this->body);
     }
 
-    public function withBody(StreamInterface $body)
+    public function withBody(StreamInterface $body): self
     {
         return $this;
     }
 
-    public function getStatusCode()
+    public function getStatusCode(): int
     {
         return $this->statusCode;
     }
 
-    public function withStatus($code, $reasonPhrase = '')
+    public function withStatus($code, $reasonPhrase = ''): self
     {
         return $this;
     }
 
-    public function getReasonPhrase()
+    public function getReasonPhrase(): string
     {
         return '';
     }

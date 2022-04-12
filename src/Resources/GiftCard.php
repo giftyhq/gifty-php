@@ -50,9 +50,7 @@ final class GiftCard extends AbstractResource
     public static function cleanCode(string $code): string
     {
         $code = str_replace(' ', '', $code);
-        $code = str_replace('-', '', $code);
-
-        return $code;
+        return str_replace('-', '', $code);
     }
 
     public function getId(): ?string

@@ -19,7 +19,7 @@ final class ServiceFactory
     /**
      * @var array<AbstractService>
      */
-    private $services;
+    private array $services;
 
     /**
      * @var array<string, class-string<AbstractService>>
@@ -41,6 +41,10 @@ final class ServiceFactory
         $this->services = [];
     }
 
+    /**
+     * @param string $name
+     * @return AbstractService|null
+     */
     public function __get(string $name): ?AbstractService
     {
         if (array_key_exists($name, self::$classMap) === false) {

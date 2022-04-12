@@ -75,11 +75,7 @@ final class GiftyMockHttpClient implements GiftyHttpClientInterface
     }
 
     /**
-     * @param string $method
-     * @param string $path
-     * @param array<string, bool|int|string> $options
-     * @return ResponseInterface
-     * @throws ApiException
+     * @inheritDoc
      */
     public function request(string $method, string $path, array $options = []): ResponseInterface
     {

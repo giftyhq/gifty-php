@@ -17,7 +17,7 @@ abstract class AbstractResource
      *
      * @var array<string, string|int|bool|null>
      */
-    protected $container = [];
+    protected array $container = [];
 
     /**
      * @var GiftyHttpClientInterface

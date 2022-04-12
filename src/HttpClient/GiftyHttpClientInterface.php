@@ -25,9 +25,9 @@ interface GiftyHttpClientInterface
 
     /**
      * @param string $token
-     * @return mixed
+     * @return void
      */
-    public function setAccessToken(string $token);
+    public function setAccessToken(string $token): void;
 
     /**
      * @param string $method
