@@ -30,6 +30,11 @@ final class GiftyClient
     private string $apiEndpoint = 'https://api.gifty.nl/v1/';
 
     /**
+     * @var array<string, string>
+     */
+    private array $apiHeaders = [];
+
+    /**
      * @var GiftyHttpClientInterface
      */
     private GiftyHttpClientInterface $httpClient;
@@ -49,6 +54,10 @@ final class GiftyClient
     {
         if (isset($options['api_endpoint'])) {
             $this->setApiEndpoint($options['api_endpoint']);
+        }
+
+        if (isset($options['api_headers']) && is_array($options['api_headers'])) {
+            $this->setApiHeaders($options['api_headers']);
         }
 
         $this->setHttpClient($httpClient);
@@ -98,10 +107,13 @@ final class GiftyClient
             $this->apiEndpoint,
             10,
             2,
-            [
+            array_merge(
+                [
                 'User-Agent' => $this->getUserAgent(GiftyHttpClient::getClientName()),
                 'Accept' => 'application/json',
-            ]
+                ],
+                $this->apiHeaders,
+            )
         );
 
         return $this;
@@ -110,6 +122,16 @@ final class GiftyClient
     private function setApiEndpoint(string $endpoint): self
     {
         $this->apiEndpoint = $endpoint;
+
+        return $this;
+    }
+
+    /**
+     * @param array<string, string> $headers
+     */
+    private function setApiHeaders(array $headers): self
+    {
+        $this->apiHeaders = $headers;
 
         return $this;
     }
