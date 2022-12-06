@@ -47,12 +47,12 @@ final class GiftyClient
     /**
      * GiftyClient constructor.
      * @param string $apiKey
-     * @param array<string, string> $options
+     * @param array<string, string|array<string, string>> $options
      * @param GiftyHttpClientInterface|null $httpClient
      */
     public function __construct(string $apiKey, array $options = [], ?GiftyHttpClientInterface $httpClient = null)
     {
-        if (isset($options['api_endpoint'])) {
+        if (isset($options['api_endpoint']) && is_string($options['api_endpoint'])) {
             $this->setApiEndpoint($options['api_endpoint']);
         }
 
