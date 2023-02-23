@@ -42,6 +42,8 @@ final class GiftCard extends AbstractResource
         $this->container['promotional'] = $data['promotional'] ?? null;
         $this->container['is_redeemable'] = $data['is_redeemable'] ?? false;
         $this->container['is_issuable'] = $data['is_issuable'] ?? false;
+        $this->container['is_extendable'] = $data['is_extendable'] ?? false;
+        $this->container['expires_at'] = $data['expires_at'] ?? null;
         $this->container['created_at'] = $data['created_at'] ?? null;
         $this->container['transactions'] = $data['transactions'] ?? null;
         $this->transactions = new GiftCardTransactionService($httpClient, $this);
@@ -77,6 +79,11 @@ final class GiftCard extends AbstractResource
         return boolval($this->container['promotional']);
     }
 
+    public function getExpiresAt(): ?string
+    {
+        return $this->container['expires_at'] ? strval($this->container['expires_at']) : null;
+    }
+
     public function getCreatedAt(): ?string
     {
         return $this->container['created_at'] ? strval($this->container['created_at']) : null;
@@ -90,5 +97,10 @@ final class GiftCard extends AbstractResource
     public function isIssuable(): bool
     {
         return $this->container['is_issuable'] === true;
+    }
+
+    public function isExtendable(): bool
+    {
+        return $this->container['is_extendable'] === true;
     }
 }

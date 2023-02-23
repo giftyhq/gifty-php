@@ -45,8 +45,10 @@ final class GiftCardTest extends TestCase
         $currency = $giftCard->getCurrency();
         $promotional = $giftCard->getPromotional();
         $created_at = $giftCard->getCreatedAt();
+        $expires_at = $giftCard->getExpiresAt();
         $is_redeemable = $giftCard->isRedeemable();
         $is_issuable = $giftCard->isIssuable();
+        $is_extendable = $giftCard->isExtendable();
 
         // Assert
         $this->assertSame($expectedOutput['apiId'], $apiId);
@@ -55,8 +57,10 @@ final class GiftCardTest extends TestCase
         $this->assertSame($expectedOutput['currency'], $currency);
         $this->assertSame($expectedOutput['promotional'], $promotional);
         $this->assertSame($expectedOutput['created_at'], $created_at);
+        $this->assertSame($expectedOutput['expires_at'], $expires_at);
         $this->assertSame($expectedOutput['is_redeemable'], $is_redeemable);
         $this->assertSame($expectedOutput['is_issuable'], $is_issuable);
+        $this->assertSame($expectedOutput['is_extendable'], $is_extendable);
     }
 
     public function testRequireCodeToBeProvided(): void
@@ -86,7 +90,9 @@ final class GiftCardTest extends TestCase
                     'promotional' => false,
                     'is_redeemable' => true,
                     'is_issuable' => false,
+                    'is_extendable' => false,
                     'created_at' => '2018-09-25T11:25:03+00:00',
+                    'expires_at' => '2027-09-15T12:42:42+00:00',
                 ],
                 [
                     'apiId' => 'giftcardCode',
@@ -96,7 +102,9 @@ final class GiftCardTest extends TestCase
                     'promotional' => false,
                     'is_redeemable' => true,
                     'is_issuable' => false,
+                    'is_extendable' => false,
                     'created_at' => '2018-09-25T11:25:03+00:00',
+                    'expires_at' => '2027-09-15T12:42:42+00:00',
                 ],
             ],
             [
@@ -108,7 +116,9 @@ final class GiftCardTest extends TestCase
                     'promotional' => true,
                     'is_redeemable' => false,
                     'is_issuable' => true,
+                    'is_extendable' => true,
                     'created_at' => '2018-09-25T11:25:03+00:00',
+                    'expires_at' => '2027-09-15T12:42:42+00:00',
                 ],
                 [
                     'apiId' => 'giftcardCode',
@@ -118,7 +128,9 @@ final class GiftCardTest extends TestCase
                     'promotional' => true,
                     'is_redeemable' => false,
                     'is_issuable' => true,
+                    'is_extendable' => true,
                     'created_at' => '2018-09-25T11:25:03+00:00',
+                    'expires_at' => '2027-09-15T12:42:42+00:00',
                 ],
             ],
             [
@@ -134,7 +146,9 @@ final class GiftCardTest extends TestCase
                     'promotional' => null,
                     'is_redeemable' => false,
                     'is_issuable' => false,
+                    'is_extendable' => false,
                     'created_at' => null,
+                    'expires_at' => null,
                 ],
             ],
         ];

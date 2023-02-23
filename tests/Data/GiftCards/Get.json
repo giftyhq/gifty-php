@@ -6,6 +6,8 @@
     "promotional": false,
     "is_redeemable": true,
     "is_issuable": false,
+    "is_extendable": false,
+    "expires_at": "2027-09-15T12:42:42+00:00",
     "created_at": "2018-09-25T11:25:03+00:00",
     "package": null,
     "transactions": [

@@ -125,4 +125,23 @@ final class GiftCardServiceTest extends TestCase
         // Assert
         $this->assertInstanceOf(Transaction::class, $transaction);
     }
+
+    public function testExtendGiftCard(): void
+    {
+        // Arrange
+        $transactionsData = (string)file_get_contents('./tests/Data/Transactions/Get.json');
+        $this->httpClient->mockHandler->append(new Response(200, [], $transactionsData));
+        $giftCardService = new GiftCardService($this->httpClient);
+
+        // Act
+        $transaction = $giftCardService->extend(
+            'giftCardCode',
+            [
+                "expires_at" => "2027-09-15T12:42:42+00:00"
+            ]
+        );
+
+        // Assert
+        $this->assertInstanceOf(Transaction::class, $transaction);
+    }
 }
