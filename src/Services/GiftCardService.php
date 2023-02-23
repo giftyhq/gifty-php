@@ -69,4 +69,21 @@ final class GiftCardService extends AbstractService
 
         return new Transaction($this->httpClient, (array)$resource);
     }
+
+    /**
+     * @param string $id
+     * @param array<string,string|bool|int> $options
+     * @return Transaction
+     * @throws ApiException
+     * @throws MissingParameterException
+     */
+    public function extend(string $id, array $options = []): Transaction
+    {
+        $id = GiftCard::cleanCode($id);
+        $path = $this->buildApiPath([$id, 'extend']);
+        $response = $this->httpClient->request('POST', $path, $options);
+        $resource = $this->parseApiResponse($response);
+
+        return new Transaction($this->httpClient, (array)$resource);
+    }
 }

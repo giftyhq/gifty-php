@@ -28,6 +28,18 @@ $gifty = new \Gifty\Client\GiftyClient('eyJ0eXAi....');
 $giftCard = $gifty->giftCards->get('ABCDABCDABCDABCD');
 ```
 
+You can also pass additional headers to the client.
+
+```php
+$gifty = new \Gifty\Client\GiftyClient('eyJ0eXAi....', ['api_headers' => [
+  'Accept-Language' => 'en',
+  'X-Gifty-Location' => 'lc_123456789'
+]]);
+$giftCard = $gifty->giftCards->get('ABCDABCDABCDABCD');
+```
+
+```php
+
 ### Retrieve Locations
 
 ```php
@@ -68,6 +80,17 @@ $transaction = $gifty->giftCards->redeem(
     "amount" => 1250,
     "currency" => "EUR",
     "capture" => false
+  ]
+);
+```
+
+### Extend a Gift Card
+
+```php
+$transaction = $gifty->giftCards->extend(
+  'ABCDABCDABCDABCD',
+  [
+    "expires_at" => "2027-09-15T12:42:42+00:00"
   ]
 );
 ```
