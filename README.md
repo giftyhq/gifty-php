@@ -38,8 +38,6 @@ $gifty = new \Gifty\Client\GiftyClient('eyJ0eXAi....', ['api_headers' => [
 $giftCard = $gifty->giftCards->get('ABCDABCDABCDABCD');
 ```
 
-```php
-
 ### Retrieve Locations
 
 ```php
