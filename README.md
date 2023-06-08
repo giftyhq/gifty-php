@@ -50,6 +50,12 @@ $locations = $gifty->locations->all();
 $packages = $gifty->packages->all();
 ```
 
+### Retrieve a Package
+
+```php
+$package = $gifty->packages->get('gp_ABCDABCD');
+```
+
 ### Retrieve a Gift Card
 
 ```php
