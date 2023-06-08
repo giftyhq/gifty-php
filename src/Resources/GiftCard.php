@@ -40,6 +40,7 @@ final class GiftCard extends AbstractResource
         $this->container['balance'] = $data['balance'] ?? 0;
         $this->container['currency'] = $data['currency'] ?? null;
         $this->container['promotional'] = $data['promotional'] ?? null;
+        $this->container['package_id'] = $data['package'] ?? null;
         $this->container['is_redeemable'] = $data['is_redeemable'] ?? false;
         $this->container['is_issuable'] = $data['is_issuable'] ?? false;
         $this->container['is_extendable'] = $data['is_extendable'] ?? false;
@@ -77,6 +78,15 @@ final class GiftCard extends AbstractResource
         }
 
         return boolval($this->container['promotional']);
+    }
+
+    public function getPackageId(): ?string
+    {
+        if ($this->container['package_id'] === null) {
+            return null;
+        }
+
+        return strval($this->container['package_id']);
     }
 
     public function getExpiresAt(): ?string
