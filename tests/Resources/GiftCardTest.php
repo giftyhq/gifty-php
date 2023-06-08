@@ -44,6 +44,7 @@ final class GiftCardTest extends TestCase
         $balance = $giftCard->getBalance();
         $currency = $giftCard->getCurrency();
         $promotional = $giftCard->getPromotional();
+        $packageId = $giftCard->getPackageId();
         $created_at = $giftCard->getCreatedAt();
         $expires_at = $giftCard->getExpiresAt();
         $is_redeemable = $giftCard->isRedeemable();
@@ -56,6 +57,7 @@ final class GiftCardTest extends TestCase
         $this->assertSame($expectedOutput['balance'], $balance);
         $this->assertSame($expectedOutput['currency'], $currency);
         $this->assertSame($expectedOutput['promotional'], $promotional);
+        $this->assertSame($expectedOutput['package_id'], $packageId);
         $this->assertSame($expectedOutput['created_at'], $created_at);
         $this->assertSame($expectedOutput['expires_at'], $expires_at);
         $this->assertSame($expectedOutput['is_redeemable'], $is_redeemable);
@@ -88,6 +90,7 @@ final class GiftCardTest extends TestCase
                     'balance' => 1250,
                     'currency' => 'EUR',
                     'promotional' => false,
+                    'package' => null,
                     'is_redeemable' => true,
                     'is_issuable' => false,
                     'is_extendable' => false,
@@ -100,6 +103,7 @@ final class GiftCardTest extends TestCase
                     'balance' => 1250,
                     'currency' => 'EUR',
                     'promotional' => false,
+                    'package_id' => null,
                     'is_redeemable' => true,
                     'is_issuable' => false,
                     'is_extendable' => false,
@@ -114,6 +118,7 @@ final class GiftCardTest extends TestCase
                     'balance' => null,
                     'currency' => 'EUR',
                     'promotional' => true,
+                    'package' => 'gp_WxBZ9wp4ov6Da1d1rgjal6Dk',
                     'is_redeemable' => false,
                     'is_issuable' => true,
                     'is_extendable' => true,
@@ -126,6 +131,7 @@ final class GiftCardTest extends TestCase
                     'balance' => 0,
                     'currency' => 'EUR',
                     'promotional' => true,
+                    'package_id' => 'gp_WxBZ9wp4ov6Da1d1rgjal6Dk',
                     'is_redeemable' => false,
                     'is_issuable' => true,
                     'is_extendable' => true,
@@ -144,6 +150,7 @@ final class GiftCardTest extends TestCase
                     'balance' => 0,
                     'currency' => null,
                     'promotional' => null,
+                    'package_id' => null,
                     'is_redeemable' => false,
                     'is_issuable' => false,
                     'is_extendable' => false,

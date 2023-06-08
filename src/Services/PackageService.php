@@ -5,6 +5,7 @@ namespace Gifty\Client\Services;
 use Gifty\Client\Resources\Collection;
 use Gifty\Client\Resources\Package;
 use Gifty\Client\Services\Operation\All;
+use Gifty\Client\Services\Operation\Get;
 
 /**
  * Class PackageService
@@ -14,6 +15,7 @@ use Gifty\Client\Services\Operation\All;
 final class PackageService extends AbstractService
 {
     use All;
+    use Get;
 
     protected const API_PATH = 'packages';
 

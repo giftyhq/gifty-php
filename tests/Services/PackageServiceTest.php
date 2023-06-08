@@ -47,4 +47,19 @@ final class PackageServiceTest extends TestCase
         $this->assertInstanceOf(Collection::class, $packages);
         $this->assertContainsOnlyInstancesOf(Package::class, $packages);
     }
+
+    public function testPackageGet(): void
+    {
+        // Arrange
+        $packagesData = (string) file_get_contents('./tests/Data/Packages/Get.json');
+        $response = new Response(200, [], $packagesData);
+        $this->httpClient->mockHandler->append($response);
+
+        // Act
+        $packageService = new PackageService($this->httpClient);
+        $package = $packageService->get("packageId");
+
+        // Assert
+        $this->assertInstanceOf(Package::class, $package);
+    }
 }
