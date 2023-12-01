@@ -21,7 +21,7 @@ use Gifty\Client\Services\TransactionService;
  */
 final class GiftyClient
 {
-    public const VERSION = '1.6.0';
+    public const VERSION = '1.7.0';
     private const USER_AGENT_FORMAT = 'Gifty/Gifty-PHP/%s/PHP/%s/%s';
 
     /**
