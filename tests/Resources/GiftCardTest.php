@@ -78,6 +78,57 @@ final class GiftCardTest extends TestCase
     }
 
     /**
+     * @dataProvider giftCardFormats
+     */
+    public function testCleanFunction(string $input, string $output): void
+    {
+        // Arrange
+
+        // Act
+        $code = GiftCard::cleanCode($input);
+
+        // Assert
+        $this->assertSame($output, $code);
+    }
+
+    /**
+     * @return array<int, array<int, string>>
+     */
+    public function giftCardFormats(): array
+    {
+        return [
+            [
+                'ABCD-ABCD-ABCD-ABCD',
+                'ABCDABCDABCDABCD',
+            ],
+            [
+                'ABCDABCDABCDABCD',
+                'ABCDABCDABCDABCD',
+            ],
+            [
+                'ABCDAB',
+                'ABCDAB',
+            ],
+            [
+                'ABC-DAB',
+                'ABCDAB',
+            ],
+            [
+                'https://wallet.gifty.nl/ABCDABCDABCDABCD/SECRETHERE',
+                'ABCDABCDABCDABCD',
+            ],
+            [
+                'https://wallet.gifty.nl/ABCDABCDABCDABCD',
+                'ABCDABCDABCDABCD',
+            ],
+            [
+                'https://wallet.gifty.nl/ABCD-ABCD-ABCD-ABCD',
+                'ABCDABCDABCDABCD',
+            ],
+        ];
+    }
+
+    /**
      * @return array<int, array<int, array<string, bool|int|string|null>>>
      */
     public function giftCardData(): array
