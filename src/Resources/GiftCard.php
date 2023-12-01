@@ -56,7 +56,7 @@ final class GiftCard extends AbstractResource
         $code = str_replace('-', '', $code);
 
         $pregMatch = preg_match('/^(.*gifty\.[a-z]{2}\/)?(?<code>[A-Z0-9]{16})(\/.*)?$/', $code, $matches);
-        
+
         return $pregMatch ? $matches['code'] : $code;
     }
 
