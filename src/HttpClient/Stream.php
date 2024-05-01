@@ -34,7 +34,7 @@ final class Stream implements StreamInterface
         return null;
     }
 
-    public function getSize()
+    public function getSize(): ?int
     {
         return null;
     }
