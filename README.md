@@ -1,6 +1,6 @@
 # Gifty PHP SDK
 [![Latest Stable Version](https://poser.pugx.org/gifty/gifty-php/v)](//packagist.org/packages/gifty/gifty-php)
-![CI](https://github.com/giftyhq/gifty-php/workflows/CI/badge.svg?branch=master)
+![CI](https://github.com/giftyhq/gifty-php/workflows/CI/badge.svg?branch=main)
 [![License](https://poser.pugx.org/gifty/gifty-php/license)](//packagist.org/packages/gifty/gifty-php)
 
 PHP library for interacting with the Gifty API. This SDK is using the public [Gifty API](https://docs.gifty.nl/api) and enables you to:
