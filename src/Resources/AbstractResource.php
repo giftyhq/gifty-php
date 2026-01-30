@@ -15,7 +15,7 @@ abstract class AbstractResource
     /**
      * Associative array for storing property values
      *
-     * @var array<string, string|int|bool|null>
+     * @var array<string, string|int|bool|null|object>
      */
     protected array $container = [];
 

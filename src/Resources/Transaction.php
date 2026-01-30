@@ -10,7 +10,7 @@ final class Transaction extends AbstractResource
     /**
      * Transaction constructor.
      * @param GiftyHttpClientInterface $httpClient
-     * @param array<string|int|bool> $data
+     * @param array<string|int|bool|object> $data
      * @throws MissingParameterException
      */
     public function __construct(GiftyHttpClientInterface $httpClient, array $data = [])
@@ -25,7 +25,10 @@ final class Transaction extends AbstractResource
         $this->container['description'] = $data['description'] ?? null;
         $this->container['is_capturable'] = $data['is_capturable'] ?? false;
         $this->container['captured_at'] = $data['captured_at'] ?? null;
+        $this->container['refund_details'] = $data['refund_details'] ?? null;
         $this->container['created_at'] = $data['created_at'] ?? null;
+        $this->container['giftcard'] = $data['giftcard'] ?? null;
+        $this->container['location'] = $data['location'] ?? null;
     }
 
     public function getId(): ?string
@@ -71,5 +74,20 @@ final class Transaction extends AbstractResource
     public function isCapturable(): bool
     {
         return $this->container['is_capturable'] === true;
+    }
+
+    public function getRefundDetails(): ?object
+    {
+        return is_object($this->container['refund_details']) ? $this->container['refund_details'] : null;
+    }
+
+    public function getGiftCard(): ?object
+    {
+        return is_object($this->container['giftcard']) ? $this->container['giftcard'] : null;
+    }
+
+    public function getLocation(): ?object
+    {
+        return is_object($this->container['location']) ? $this->container['location'] : null;
     }
 }
