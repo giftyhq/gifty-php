@@ -55,4 +55,19 @@ final class TransactionService extends AbstractService
 
         return new Transaction($this->httpClient, (array)$resources);
     }
+
+    /**
+     * @param string $transactionId
+     * @param array<string,string|bool|int> $options
+     * @return Transaction
+     * @throws ApiException
+     */
+    public function refund(string $transactionId, array $options = []): Transaction
+    {
+        $path = $this->buildApiPath([$transactionId, 'refund']);
+        $response = $this->httpClient->request('POST', $path, $options);
+        $resources = $this->parseApiResponse($response);
+
+        return new Transaction($this->httpClient, (array)$resources);
+    }
 }
