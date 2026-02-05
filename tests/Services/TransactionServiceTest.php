@@ -128,4 +128,24 @@ final class TransactionServiceTest extends TestCase
         // Assert
         $this->assertInstanceOf(Transaction::class, $transaction);
     }
+
+    public function testRefundTransaction(): void
+    {
+        // Arrange
+        $transactionsData = (string) file_get_contents('./tests/Data/Transactions/Get.json');
+        $response = new Response(200, [], $transactionsData);
+        $this->httpClient->mockHandler->append($response);
+
+        // Act
+        $transactionService = new TransactionService($this->httpClient);
+        $transaction = $transactionService->refund('transactionId', [
+            'amount' => 1250,
+            'currency' => 'EUR',
+            'reason' => 'CUSTOMER_REQUEST',
+            'reason_description' => 'Customer returned one item from the order'
+        ]);
+
+        // Assert
+        $this->assertInstanceOf(Transaction::class, $transaction);
+    }
 }

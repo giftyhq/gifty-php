@@ -130,6 +130,20 @@ $transaction = $gifty->transactions->capture('tr_BV94pGgqRvgobxvrLX28jEl0');
 $transaction = $gifty->transactions->release('tr_BV94pGgqRvgobxvrLX28jEl0');
 ```
 
+### Refund a Transaction
+
+```php
+$transaction = $gifty->transactions->refund(
+  'tr_BV94pGgqRvgobxvrLX28jEl0',
+  [
+    "amount" => 1250,
+    "currency" => "EUR",
+    "reason" => "CUSTOMER_REQUEST",
+    "reason_description" => "Customer returned one item from the order"
+  ]
+);
+```
+
 ## Development
 Clone the Git repository, so you have a local working copy.
 

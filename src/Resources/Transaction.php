@@ -26,6 +26,7 @@ final class Transaction extends AbstractResource
         $this->container['is_capturable'] = $data['is_capturable'] ?? false;
         $this->container['captured_at'] = $data['captured_at'] ?? null;
         $this->container['created_at'] = $data['created_at'] ?? null;
+        $this->container['refund_details'] = $data['refund_details'] ?? null;
     }
 
     public function getId(): ?string
@@ -71,5 +72,13 @@ final class Transaction extends AbstractResource
     public function isCapturable(): bool
     {
         return $this->container['is_capturable'] === true;
+    }
+
+    /**
+     * @return array<int,bool|int|string>|null
+     */
+    public function getRefundDetails(): ?array
+    {
+        return $this->container['refund_details'] ? (array) $this->container['refund_details'] : null;
     }
 }
