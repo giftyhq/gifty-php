@@ -115,11 +115,7 @@ final class GiftyHttpClient implements GiftyHttpClientInterface
             $curlResponse = '';
         }
 
-        $psrResponse = $this->buildPsrResponse($curlResponse, $responseHeaders, $ch);
-
-        curl_close($ch);
-
-        return $psrResponse;
+        return $this->buildPsrResponse($curlResponse, $responseHeaders, $ch);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace Gifty\Client\Services;
 
 use Gifty\Client\Exceptions\ApiException;
+use Gifty\Client\Exceptions\InvalidIdentifierException;
 use Gifty\Client\HttpClient\GiftyHttpClientInterface;
 use Gifty\Client\Resources\AbstractResource;
 use Psr\Http\Message\ResponseInterface;
@@ -41,6 +42,7 @@ abstract class AbstractService
     /**
      * @param array<string> $arguments
      * @return string
+     * @throws InvalidIdentifierException
      */
     protected function buildApiPath(array $arguments = []): string
     {
@@ -52,6 +54,7 @@ abstract class AbstractService
     /**
      * @param array<string> $arguments
      * @return string
+     * @throws InvalidIdentifierException
      */
     protected function buildParentApiPath(array $arguments = []): string
     {
@@ -63,7 +66,25 @@ abstract class AbstractService
             );
         }
 
-        return implode('/', $arguments);
+        return implode('/', array_map([$this, 'encodePathSegment'], $arguments));
+    }
+
+    /**
+     * Encodes a value for use as a single path segment.
+     *
+     * @param string $segment
+     * @return string
+     * @throws InvalidIdentifierException
+     */
+    private function encodePathSegment(string $segment): string
+    {
+        if (in_array($segment, ['', '.', '..'], true)) {
+            throw new InvalidIdentifierException(
+                sprintf('The value \'%s\' is not a valid identifier.', $segment)
+            );
+        }
+
+        return rawurlencode($segment);
     }
 
     /**
