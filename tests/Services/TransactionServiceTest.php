@@ -83,6 +83,23 @@ final class TransactionServiceTest extends TestCase
         $this->assertInstanceOf(Transaction::class, $transaction);
     }
 
+    public function testTransactionIdIsEncodedInPath(): void
+    {
+        // Arrange
+        $transactionsData = (string) file_get_contents('./tests/Data/Transactions/Get.json');
+        $response = new Response(200, [], $transactionsData);
+        $this->httpClient->mockHandler->append($response);
+
+        // Act
+        $transactionService = new TransactionService($this->httpClient);
+        $transactionService->get("transaction id/1");
+
+        // Assert
+        $request = $this->httpClient->mockHandler->getLastRequest();
+        $this->assertNotNull($request);
+        $this->assertSame('/transactions/transaction%20id%2F1', $request->getUri()->getPath());
+    }
+
     public function testTransactionGetNotFound(): void
     {
         // Arrange
